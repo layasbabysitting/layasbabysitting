@@ -1,267 +1,881 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laya's Babysitting</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laya's Babysitting</title>
+  <meta
+    name="description"
+    content="Laya's Babysitting offers trusted babysitting in Austin, Pflugerville, Round Rock, Georgetown, Manor, Del Valle, Kyle, Buda, and San Marcos. Call or text 512-230-9391."
+  />
 
-<style>
+  <style>
+    :root{
+      --purple:#4b0d73;
+      --purple2:#7b2cbf;
+      --red:#c1121f;
+      --red2:#ff4d4d;
+      --gold:#f7c948;
+      --gold2:#ffdd75;
+      --dark:#1f082c;
+      --dark2:#2d0b3d;
+      --white:#ffffff;
+      --soft:#fff7fb;
+      --card:#ffffff;
+      --shadow:0 14px 30px rgba(0,0,0,.20);
+      --glow:0 0 16px rgba(247,201,72,.45);
+    }
 
-body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background:linear-gradient(180deg,#3a0a4f,#7a0f36,#2b0822);
-color:white;
-}
+    *{
+      box-sizing:border-box;
+    }
 
-.topbar{
-text-align:center;
-padding:12px;
-background:#220432;
-font-size:16px;
-}
+    html{
+      scroll-behavior:smooth;
+    }
 
-.topbar a{
-color:gold;
-font-weight:bold;
-}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,.08), transparent 30%),
+        linear-gradient(180deg, #2a083d 0%, #4b0d73 30%, #7b1038 65%, #2b0b24 100%);
+      color:var(--white);
+      overflow-x:hidden;
+    }
 
-header{
-padding:20px;
-text-align:center;
-}
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-.logo{
-width:120px;
-border-radius:50%;
-background:white;
-padding:6px;
-}
+    .stars-bg{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.9) 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,215,120,.8) 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,255,255,.65) 1px, transparent 1.5px);
+      background-size: 120px 120px, 180px 180px, 240px 240px;
+      background-position: 0 0, 40px 60px, 80px 20px;
+      opacity:.28;
+      z-index:0;
+    }
 
-h1{
-font-size:40px;
-color:gold;
-margin:10px 0;
-}
+    .topbar{
+      position:relative;
+      z-index:2;
+      text-align:center;
+      padding:14px 16px;
+      font-size:16px;
+      color:var(--white);
+      background:rgba(20,7,35,.55);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
 
-.tag{
-font-size:20px;
-}
+    .topbar a{
+      color:var(--gold2);
+      font-weight:bold;
+    }
 
-.hero{
-text-align:center;
-padding:40px 20px;
-}
+    .container{
+      width:min(1120px, 92%);
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
 
-button{
-padding:16px 30px;
-border-radius:40px;
-border:none;
-font-size:20px;
-margin:10px;
-cursor:pointer;
-}
+    header{
+      position:relative;
+      z-index:2;
+      padding:18px 0 54px;
+      overflow:hidden;
+    }
 
-.book{
-background:red;
-color:white;
-}
+    .gold-line{
+      width:100%;
+      height:4px;
+      background:linear-gradient(90deg, transparent, var(--gold), transparent);
+      box-shadow:var(--glow);
+      margin:10px 0 20px;
+      border-radius:999px;
+    }
 
-.learn{
-background:purple;
-color:white;
-}
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      position:relative;
+    }
 
-section{
-padding:40px 20px;
-max-width:900px;
-margin:auto;
-}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
 
-.card{
-background:white;
-color:black;
-padding:25px;
-border-radius:20px;
-margin:15px 0;
-}
+    .brand img{
+      width:78px;
+      height:78px;
+      object-fit:contain;
+      background:rgba(255,255,255,.95);
+      border-radius:50%;
+      padding:6px;
+      box-shadow:0 0 18px rgba(255,255,255,.18), 0 0 22px rgba(247,201,72,.30);
+      flex-shrink:0;
+    }
 
-.card h3{
-color:red;
-}
+    .brand-text{
+      min-width:0;
+    }
 
-form{
-background:white;
-color:black;
-padding:25px;
-border-radius:20px;
-}
+    .brand-text h1{
+      margin:0;
+      font-size:34px;
+      line-height:1.05;
+      color:var(--gold2);
+      text-shadow:
+        0 2px 0 rgba(0,0,0,.18),
+        0 0 10px rgba(247,201,72,.18);
+    }
 
-input, textarea{
-width:100%;
-padding:12px;
-margin:8px 0;
-border-radius:10px;
-border:1px solid #ccc;
-font-size:16px;
-}
+    .brand-text p{
+      margin:6px 0 0;
+      font-size:15px;
+      color:#fff3c2;
+    }
 
-.submit{
-background:red;
-color:white;
-font-size:20px;
-padding:15px;
-border-radius:30px;
-border:none;
-cursor:pointer;
-}
+    .nav-links{
+      display:flex;
+      gap:28px;
+      align-items:center;
+      font-weight:bold;
+      color:#ffe8a3;
+      text-shadow:0 0 10px rgba(247,201,72,.18);
+    }
 
-footer{
-text-align:center;
-padding:30px;
-background:#220432;
-margin-top:40px;
-}
+    .nav-links a:hover{
+      color:var(--white);
+    }
 
-</style>
+    .menu-toggle{
+      display:none;
+      background:transparent;
+      border:none;
+      cursor:pointer;
+      padding:8px;
+    }
+
+    .menu-toggle span{
+      display:block;
+      width:30px;
+      height:4px;
+      margin:5px 0;
+      background:var(--white);
+      border-radius:999px;
+      box-shadow:0 0 8px rgba(255,255,255,.2);
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:34px;
+      align-items:center;
+      padding:26px 0 10px;
+    }
+
+    .hero-copy h2{
+      margin:0 0 12px;
+      font-size:74px;
+      line-height:.98;
+      color:#fff6d0;
+      text-shadow:
+        0 4px 0 rgba(60,0,0,.18),
+        0 0 20px rgba(255,221,117,.28);
+    }
+
+    .hero-copy .sub{
+      font-size:26px;
+      line-height:1.45;
+      color:#fff2df;
+      margin:0 0 18px;
+      max-width:760px;
+    }
+
+    .hero-copy .mini{
+      font-size:22px;
+      color:#ffeec8;
+      margin:8px 0;
+    }
+
+    .hero-buttons{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+      margin:28px 0 18px;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:18px 34px;
+      border-radius:999px;
+      font-weight:bold;
+      font-size:22px;
+      border:2px solid rgba(255,255,255,.28);
+      box-shadow:var(--shadow);
+      transition:.2s ease;
+      text-align:center;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px) scale(1.01);
+    }
+
+    .btn-book{
+      background:linear-gradient(180deg, #ff4d4d, #c1121f);
+      color:#fff5c3;
+      box-shadow:
+        0 0 18px rgba(255,77,77,.35),
+        0 0 12px rgba(247,201,72,.18);
+    }
+
+    .btn-more{
+      background:linear-gradient(180deg, #7b2cbf, #4b0d73);
+      color:#ffe8a3;
+      box-shadow:
+        0 0 18px rgba(123,44,191,.35),
+        0 0 12px rgba(247,201,72,.18);
+    }
+
+    .hero-art{
+      text-align:center;
+    }
+
+    .hero-art img{
+      width:min(380px, 90%);
+      max-width:100%;
+      object-fit:contain;
+      filter:drop-shadow(0 0 26px rgba(247,201,72,.28));
+    }
+
+    .hero-card{
+      margin-top:20px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:24px;
+      padding:24px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(8px);
+    }
+
+    .hero-card h3{
+      margin-top:0;
+      color:#ffe8a3;
+      font-size:28px;
+    }
+
+    .hero-card ul{
+      margin:0;
+      padding-left:20px;
+      font-size:19px;
+      color:#fff4db;
+    }
+
+    .wave{
+      position:relative;
+      height:78px;
+      margin-top:14px;
+    }
+
+    .wave::before,
+    .wave::after{
+      content:"";
+      position:absolute;
+      left:-5%;
+      width:110%;
+      border-radius:50% 50% 0 0 / 100% 100% 0 0;
+    }
+
+    .wave::before{
+      bottom:14px;
+      height:60px;
+      background:linear-gradient(90deg, rgba(247,201,72,.95), rgba(255,120,40,.95), rgba(247,201,72,.95));
+      box-shadow:0 0 22px rgba(247,201,72,.35);
+    }
+
+    .wave::after{
+      bottom:0;
+      height:40px;
+      background:linear-gradient(90deg, rgba(255,80,60,.92), rgba(247,201,72,.9), rgba(255,80,60,.92));
+      opacity:.95;
+    }
+
+    section{
+      position:relative;
+      z-index:2;
+      padding:58px 0;
+    }
+
+    .section-shell{
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:28px;
+      padding:34px 26px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(6px);
+    }
+
+    .section-title{
+      text-align:center;
+      margin:0 0 12px;
+      font-size:46px;
+      color:#ffe8a3;
+      text-shadow:0 0 10px rgba(247,201,72,.18);
+    }
+
+    .section-subtitle{
+      text-align:center;
+      font-size:20px;
+      color:#fff1db;
+      max-width:760px;
+      margin:0 auto 28px;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+    }
+
+    .service-btn{
+      background:transparent;
+      border:none;
+      padding:0;
+      text-align:left;
+      cursor:pointer;
+      color:inherit;
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,245,250,.92));
+      color:#31113f;
+      border-radius:22px;
+      padding:26px;
+      min-height:220px;
+      box-shadow:var(--shadow);
+      transition:.22s ease;
+    }
+
+    .service-btn:hover .card,
+    .service-btn:active .card{
+      transform:translateY(-6px);
+      box-shadow:0 18px 34px rgba(0,0,0,.24);
+    }
+
+    .card h3{
+      margin:0 0 14px;
+      font-size:31px;
+      color:var(--red);
+    }
+
+    .card p{
+      margin:0;
+      font-size:22px;
+      color:#2f2740;
+      line-height:1.45;
+    }
+
+    .areas{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:12px;
+    }
+
+    .pill{
+      background:linear-gradient(180deg, rgba(123,44,191,.95), rgba(193,18,31,.95));
+      color:#fff6cf;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:bold;
+      font-size:17px;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 0 12px rgba(247,201,72,.12);
+    }
+
+    .booking-wrap{
+      max-width:820px;
+      margin:0 auto;
+      background:linear-gradient(180deg, rgba(255,255,255,.97), rgba(255,245,250,.94));
+      color:#31113f;
+      border-radius:26px;
+      padding:32px;
+      box-shadow:var(--shadow);
+    }
+
+    .booking-wrap h3{
+      margin:0 0 16px;
+      font-size:34px;
+      color:var(--purple);
+      text-align:center;
+    }
+
+    .success-banner{
+      display:none;
+      max-width:820px;
+      margin:0 auto 24px;
+      background:#fff1c8;
+      color:#3a203e;
+      border-left:6px solid var(--gold);
+      border-radius:16px;
+      padding:16px 18px;
+      box-shadow:var(--shadow);
+      font-size:17px;
+    }
+
+    input, textarea{
+      width:100%;
+      padding:16px;
+      margin-bottom:14px;
+      border:1px solid #d8d1df;
+      border-radius:12px;
+      font-size:17px;
+      font-family:inherit;
+      color:#31113f;
+      background:#fff;
+    }
+
+    textarea{
+      min-height:130px;
+      resize:vertical;
+    }
+
+    .submit-btn{
+      width:100%;
+      border:none;
+      border-radius:999px;
+      padding:17px 22px;
+      font-size:22px;
+      font-weight:bold;
+      cursor:pointer;
+      background:linear-gradient(180deg, #ff4d4d, #c1121f);
+      color:#fff6cf;
+      box-shadow:
+        0 0 18px rgba(255,77,77,.35),
+        0 0 12px rgba(247,201,72,.18);
+    }
+
+    .notice{
+      margin-top:16px;
+      background:#fff5d9;
+      color:#3a203e;
+      border-left:6px solid var(--gold);
+      border-radius:14px;
+      padding:15px;
+      font-size:16px;
+    }
+
+    .map-frame{
+      width:100%;
+      height:420px;
+      border:0;
+      border-radius:24px;
+      box-shadow:var(--shadow);
+    }
+
+    .reviews-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+    }
+
+    .review{
+      background:linear-gradient(180deg, rgba(255,255,255,.97), rgba(255,245,250,.94));
+      color:#31113f;
+      border-radius:22px;
+      padding:24px;
+      box-shadow:var(--shadow);
+      font-size:20px;
+      line-height:1.5;
+    }
+
+    .stars{
+      color:var(--gold);
+      font-size:24px;
+      margin-bottom:12px;
+      text-shadow:0 0 10px rgba(247,201,72,.22);
+    }
+
+    .contact-box{
+      text-align:center;
+      font-size:22px;
+      line-height:1.8;
+      color:#fff5db;
+    }
+
+    .contact-box a{
+      color:#ffe8a3;
+      font-weight:bold;
+    }
+
+    footer{
+      position:relative;
+      z-index:2;
+      padding:34px 20px 44px;
+      text-align:center;
+      color:#fff2df;
+      background:rgba(20,7,35,.55);
+      border-top:1px solid rgba(255,255,255,.08);
+      font-size:18px;
+      line-height:1.7;
+    }
+
+    @media (max-width: 950px){
+      .hero,
+      .cards,
+      .reviews-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero h2{
+        font-size:54px;
+      }
+
+      .nav{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .nav-links{
+        display:none;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:14px;
+        width:100%;
+        background:rgba(43,22,51,.96);
+        padding:16px;
+        border-radius:18px;
+      }
+
+      .nav-links.show{
+        display:flex;
+      }
+
+      .menu-toggle{
+        display:block;
+      }
+    }
+
+    @media (max-width: 560px){
+      .topbar{
+        font-size:15px;
+        line-height:1.5;
+      }
+
+      .brand img{
+        width:74px;
+        height:74px;
+      }
+
+      .brand-text h1{
+        font-size:26px;
+      }
+
+      .hero-copy h2,
+      .hero h2{
+        font-size:40px;
+      }
+
+      .hero-copy .sub,
+      .hero p{
+        font-size:20px;
+      }
+
+      .btn{
+        width:100%;
+        font-size:19px;
+      }
+
+      .section-title{
+        font-size:34px;
+      }
+
+      .section-subtitle{
+        font-size:18px;
+      }
+
+      .card h3{
+        font-size:27px;
+      }
+
+      .card p{
+        font-size:20px;
+      }
+
+      .review{
+        font-size:18px;
+      }
+
+      .contact-box{
+        font-size:19px;
+      }
+
+      input, textarea{
+        font-size:16px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="topbar">
-Babysitting in Austin • Pflugerville • Round Rock • Georgetown • Manor • Del Valle • Kyle • Buda • San Marcos  
-<br>
-<a href="tel:5122309391">Call/Text 512-230-9391</a>
-</div>
+  <div class="stars-bg"></div>
 
-<header>
+  <div class="topbar">
+    Babysitting available in Austin, Pflugerville, Round Rock, Georgetown, Manor, Del Valle, Kyle, Buda, and San Marcos •
+    <a href="tel:5122309391">Call/Text 512-230-9391</a>
+  </div>
 
-<img src="butterfly-logo.png" class="logo">
+  <header>
+    <div class="container">
+      <div class="nav">
+        <div class="nav-top" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+          <div class="brand">
+            <img src="butterfly-logo.png" alt="Laya's Babysitting butterfly logo">
+            <div class="brand-text">
+              <h1>Laya's Babysitting</h1>
+              <p>Loving Care for Your Little Ones</p>
+            </div>
+          </div>
 
-<h1>Laya's Babysitting</h1>
+          <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
 
-<div class="tag">Loving Care for Your Little Ones</div>
+        <div class="nav-links" id="navLinks">
+          <a href="#home">Home</a>
+          <a href="#services">Services</a>
+          <a href="#areas">Areas</a>
+          <a href="#booking">Book Now</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
 
-</header>
+      <div class="gold-line"></div>
 
-<div class="hero">
+      <div class="hero" id="home">
+        <div class="hero-copy">
+          <h2>Trusted babysitting for busy families.</h2>
+          <p class="sub">
+            Safe, dependable childcare with easy booking, clear communication, and loving care for your little ones.
+          </p>
 
-<p>Safe, dependable childcare with easy booking and loving care.</p>
+          <div class="hero-buttons">
+            <a class="btn btn-more" href="#services">Learn More</a>
+            <a class="btn btn-book" href="#booking">Book Now</a>
+          </div>
 
-<button class="learn" onclick="document.getElementById('services').scrollIntoView()">Learn More</button>
+          <p class="mini"><strong>Gmail:</strong> <a href="mailto:Layacrayton22@gmail.com" style="text-decoration:underline;">Layacrayton22@gmail.com</a></p>
+          <p class="mini"><strong>Rate:</strong> $20–$26 per hour</p>
+        </div>
 
-<button class="book" onclick="document.getElementById('booking').scrollIntoView()">Book Now</button>
+        <div class="hero-art">
+          <img src="butterfly-logo.png" alt="Butterfly logo">
+          <div class="hero-card">
+            <h3>Quick Info</h3>
+            <ul>
+              <li>Booking requests go to Gmail</li>
+              <li>Zelle, Apple Pay, and Cash accepted</li>
+              <li>Payment requested after babysitting</li>
+              <li>Last-minute cancellation fee may apply</li>
+              <li>Call or text for faster replies</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-</div>
+      <div class="wave"></div>
+    </div>
+  </header>
 
-<section id="services">
+  <section id="services">
+    <div class="container">
+      <div class="section-shell">
+        <h2 class="section-title">Babysitting Services</h2>
+        <p class="section-subtitle">
+          Tap a service below and it will fill the booking form automatically.
+        </p>
 
-<h2>Babysitting Services</h2>
+        <div class="cards">
+          <button type="button" class="service-btn" onclick="setServiceAndGo('Date Night Babysitting')">
+            <div class="card">
+              <h3>Date Night Babysitting</h3>
+              <p>Reliable childcare while parents enjoy a night out.</p>
+            </div>
+          </button>
 
-<div class="card">
-<h3>Date Night Babysitting</h3>
-<p>Reliable childcare while parents enjoy a night out.</p>
-</div>
+          <button type="button" class="service-btn" onclick="setServiceAndGo('Weekend Babysitting')">
+            <div class="card">
+              <h3>Weekend Babysitting</h3>
+              <p>Flexible weekend babysitting for busy families.</p>
+            </div>
+          </button>
 
-<div class="card">
-<h3>Weekend Babysitting</h3>
-<p>Flexible weekend babysitting for busy families.</p>
-</div>
+          <button type="button" class="service-btn" onclick="setServiceAndGo('Recurring Babysitting')">
+            <div class="card">
+              <h3>Recurring Babysitting</h3>
+              <p>Ongoing babysitting depending on schedule availability.</p>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="card">
-<h3>Recurring Babysitting</h3>
-<p>Ongoing babysitting depending on schedule availability.</p>
-</div>
+  <section id="areas">
+    <div class="container">
+      <div class="section-shell">
+        <h2 class="section-title">Service Areas</h2>
+        <p class="section-subtitle">Babysitting available in and around these areas.</p>
 
-</section>
+        <div class="areas">
+          <div class="pill">Austin</div>
+          <div class="pill">Pflugerville</div>
+          <div class="pill">Round Rock</div>
+          <div class="pill">Georgetown</div>
+          <div class="pill">Manor</div>
+          <div class="pill">Del Valle</div>
+          <div class="pill">Kyle</div>
+          <div class="pill">Buda</div>
+          <div class="pill">San Marcos</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section>
+  <section id="booking">
+    <div class="container">
+      <div class="success-banner" id="successBanner">
+        Your booking request was sent to Laya’s Babysitting. Please check your messages or wait for a reply soon.
+      </div>
 
-<h2>Service Areas</h2>
+      <div class="booking-wrap">
+        <h3>Book Now</h3>
 
-<p>
-Austin • Pflugerville • Round Rock • Georgetown • Manor • Del Valle • Kyle • Buda • San Marcos
-</p>
+        <form action="https://formsubmit.co/Layacrayton22@gmail.com" method="POST">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_subject" value="New Babysitting Booking Request">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://layasbabysitting.github.io/layasbabysitting/?sent=1#booking">
 
-</section>
+          <input type="text" id="serviceType" name="Service Type" placeholder="Service Requested">
+          <input type="text" name="Parent Name" placeholder="Your Name" required>
+          <input type="tel" name="Phone Number" placeholder="Phone Number" required>
+          <input type="email" name="Gmail" placeholder="Your Gmail">
+          <input type="date" name="Date Needed" required>
+          <input type="time" name="Start Time" required>
+          <input type="number" name="Hours Needed" placeholder="Hours Needed">
+          <textarea name="Notes" placeholder="Child ages, location, or special notes"></textarea>
 
-<section id="booking">
+          <button type="submit" class="submit-btn">Send Booking Request</button>
+        </form>
 
-<h2>Book Babysitting</h2>
+        <div class="notice">
+          Booking requests from this website go to your Gmail inbox at <strong>Layacrayton22@gmail.com</strong>.
+          The first time FormSubmit is used, check Gmail and confirm it once.
+        </div>
+      </div>
+    </div>
+  </section>
 
-<form action="https://formsubmit.co/Layacrayton22@gmail.com" method="POST">
+  <section>
+    <div class="container">
+      <div class="section-shell">
+        <h2 class="section-title">Service Area Map</h2>
+        <iframe class="map-frame" src="https://www.google.com/maps?q=Austin%20Texas&output=embed"></iframe>
+      </div>
+    </div>
+  </section>
 
-<input type="hidden" name="_captcha" value="false">
+  <section id="reviews">
+    <div class="container">
+      <div class="section-shell">
+        <h2 class="section-title">Parent Reviews</h2>
 
-<input type="text" name="Name" placeholder="Your Name" required>
+        <div class="reviews-grid">
+          <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"Laya was amazing with our kids and very reliable."</p>
+          </div>
 
-<input type="tel" name="Phone" placeholder="Phone Number" required>
+          <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"Great communication and very professional."</p>
+          </div>
 
-<input type="email" name="Email" placeholder="Email">
+          <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"Our kids loved her and we felt very comfortable."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<input type="date" name="Date Needed" required>
+  <section id="contact">
+    <div class="container">
+      <div class="section-shell">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-box">
+          Phone: <a href="tel:5122309391">512-230-9391</a><br>
+          Gmail: <a href="mailto:Layacrayton22@gmail.com">Layacrayton22@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<input type="time" name="Start Time">
+  <footer>
+    <div><strong>Laya's Babysitting</strong></div>
+    <div>Loving Care for Your Little Ones</div>
+    <div>Serving Austin, Pflugerville, Round Rock, Georgetown, Manor, Del Valle, Kyle, Buda, and San Marcos</div>
+    <div>Phone: 512-230-9391 • Gmail: Layacrayton22@gmail.com</div>
+  </footer>
 
-<input type="number" name="Hours Needed" placeholder="Hours Needed">
+  <script>
+    function toggleMenu(){
+      document.getElementById("navLinks").classList.toggle("show");
+    }
 
-<textarea name="Notes" placeholder="Child ages, location, or notes"></textarea>
+    function setServiceAndGo(service){
+      var input = document.getElementById("serviceType");
+      if(input){
+        input.value = service;
+      }
+      var booking = document.getElementById("booking");
+      if(booking){
+        booking.scrollIntoView({behavior:"smooth"});
+      }
+      var nav = document.getElementById("navLinks");
+      if(nav){
+        nav.classList.remove("show");
+      }
+    }
 
-<button class="submit">Send Booking Request</button>
-
-</form>
-
-<p>
-Booking requests go directly to Gmail:
-<br>
-<strong>Layacrayton22@gmail.com</strong>
-</p>
-
-</section>
-
-<section>
-
-<h2>Reviews</h2>
-
-<div class="card">
-★★★★★  
-"Laya was amazing with our kids!"
-</div>
-
-<div class="card">
-★★★★★  
-"Very reliable and professional."
-</div>
-
-<div class="card">
-★★★★★  
-"Our kids loved her!"
-</div>
-
-</section>
-
-<section>
-
-<h2>Map</h2>
-
-<iframe
-width="100%"
-height="350"
-style="border:0;border-radius:20px;"
-src="https://www.google.com/maps?q=Austin%20Texas&output=embed">
-</iframe>
-
-</section>
-
-<footer>
-
-<p><strong>Laya's Babysitting</strong></p>
-
-<p>Phone: 512-230-9391</p>
-
-<p>Email: Layacrayton22@gmail.com</p>
-
-</footer>
+    if(window.location.search.indexOf("sent=1") !== -1){
+      var banner = document.getElementById("successBanner");
+      if(banner){
+        banner.style.display = "block";
+      }
+    }
+  </script>
 
 </body>
 </html>
