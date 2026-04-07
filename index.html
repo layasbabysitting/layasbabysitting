@@ -8,17 +8,16 @@
 
   <style>
     :root{
-      --bg1:#260033;
-      --bg2:#5d007a;
-      --bg3:#a5005a;
-      --panel:#3a0048;
-      --gold:#f4d77c;
+      --bg1:#2c0040;
+      --bg2:#5d0078;
+      --bg3:#a30062;
+      --pink:#ff66c4;
+      --gold:#f6cf63;
       --gold2:#ffd84a;
+      --purple:#8b3dff;
       --white:#ffffff;
-      --text:#1f1724;
-      --purple:#6f12c8;
-      --red:#ef2020;
-      --shadow:0 12px 28px rgba(0,0,0,.18);
+      --cardText:#2d2134;
+      --shadow:0 12px 30px rgba(0,0,0,.20);
     }
 
     *{box-sizing:border-box}
@@ -27,95 +26,58 @@
     body{
       margin:0;
       font-family:Arial, Helvetica, sans-serif;
-      color:var(--white);
+      color:white;
       background:
-        radial-gradient(circle at 15% 10%, rgba(255,255,255,.10) 0 2px, transparent 3px),
-        radial-gradient(circle at 80% 18%, rgba(255,216,74,.12) 0 2px, transparent 3px),
-        radial-gradient(circle at 40% 70%, rgba(255,255,255,.08) 0 2px, transparent 3px),
+        radial-gradient(circle at 10% 12%, rgba(255,255,255,.22) 0 1px, transparent 2px),
+        radial-gradient(circle at 70% 22%, rgba(255,215,0,.18) 0 1px, transparent 2px),
+        radial-gradient(circle at 35% 70%, rgba(255,255,255,.18) 0 1px, transparent 2px),
+        radial-gradient(circle at 85% 80%, rgba(255,215,0,.18) 0 1px, transparent 2px),
         linear-gradient(180deg,var(--bg1),var(--bg2),var(--bg3));
-      background-size:90px 90px, 120px 120px, 150px 150px, auto;
+      background-size:38px 38px, 52px 52px, 64px 64px, 58px 58px, auto;
     }
 
-    a{text-decoration:none;color:inherit}
-
-    .topbar{
-      text-align:center;
-      padding:12px 14px;
-      font-size:14px;
-      line-height:1.5;
-      color:#fff4d4;
-      background:rgba(24,0,30,.45);
-      border-bottom:1px solid rgba(255,255,255,.08);
-    }
-
-    .topbar a{
-      color:var(--gold2);
-      font-weight:700;
+    a{
+      color:inherit;
+      text-decoration:none;
     }
 
     .page{
-      max-width:1000px;
+      max-width:1100px;
       margin:0 auto;
-      padding-bottom:40px;
+      padding:0 18px 40px;
     }
 
-    .header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      padding:22px 18px 12px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      min-width:0;
-    }
-
-    .brand img{
-      width:82px;
-      height:82px;
-      object-fit:cover;
-      border-radius:50%;
-      background:#fff;
-      padding:6px;
-      box-shadow:0 0 18px rgba(255,216,74,.25);
-      flex-shrink:0;
-    }
-
-    .brand-text h1{
-      margin:0;
-      font-size:clamp(28px,4vw,44px);
-      line-height:1.02;
-      color:var(--gold2);
-    }
-
-    .brand-text p{
-      margin:6px 0 0;
-      font-size:clamp(14px,2vw,18px);
-      color:#f8e7ab;
+    .top-hero{
+      position:relative;
+      text-align:center;
+      padding:32px 0 28px;
     }
 
     .menu-btn{
+      position:absolute;
+      right:0;
+      top:28px;
+      background:none;
       border:none;
-      background:transparent;
-      color:#fff;
-      font-size:40px;
-      line-height:1;
+      color:white;
+      font-size:38px;
       cursor:pointer;
-      padding:6px 10px;
       width:auto;
+      padding:0 8px;
     }
 
     .menu-panel{
       display:none;
-      margin:6px 18px 18px;
-      background:rgba(45,0,53,.96);
-      border-radius:26px;
-      padding:18px 22px;
+      position:absolute;
+      right:0;
+      top:76px;
+      width:240px;
+      background:rgba(39,0,51,.96);
+      border-radius:22px;
+      padding:16px 18px;
       box-shadow:var(--shadow);
+      text-align:left;
+      z-index:20;
     }
 
     .menu-panel.show{
@@ -124,248 +86,220 @@
 
     .menu-panel a{
       display:block;
-      color:var(--gold);
-      font-size:22px;
+      color:#ffe7a3;
+      font-size:20px;
       font-weight:700;
       padding:10px 0;
     }
 
-    .gold-line{
-      height:6px;
-      margin:0 18px 22px;
-      border-radius:999px;
-      background:linear-gradient(90deg, transparent, var(--gold2), transparent);
-      box-shadow:0 0 12px rgba(255,216,74,.32);
+    .butterfly{
+      width:120px;
+      height:120px;
+      object-fit:cover;
+      border-radius:50%;
+      background:white;
+      padding:6px;
+      box-shadow:0 0 22px rgba(255,255,255,.20);
+      margin-bottom:10px;
     }
 
-    .hero{
-      padding:8px 18px 18px;
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:24px;
-      align-items:center;
+    .brand{
+      font-size:48px;
+      font-weight:700;
+      color:#ffe3f7;
+      margin:0;
+      font-family:Georgia, "Times New Roman", serif;
+      text-shadow:0 0 16px rgba(255,255,255,.10);
     }
 
-    .hero-copy h2{
-      margin:0 0 14px;
-      font-size:clamp(42px,8vw,78px);
-      line-height:1.02;
-      color:#fff8d6;
+    .tagline{
+      margin:8px 0 28px;
+      font-size:18px;
+      color:#ffeab5;
     }
 
-    .hero-copy p{
-      margin:0 0 22px;
-      font-size:clamp(20px,2.5vw,28px);
-      line-height:1.45;
-      color:#fff2df;
+    .headline{
+      font-size:58px;
+      line-height:1.06;
+      margin:0 0 12px;
+      font-family:Georgia, "Times New Roman", serif;
+      color:#fff7e5;
+    }
+
+    .subtext{
+      font-size:21px;
+      line-height:1.5;
+      max-width:760px;
+      margin:0 auto 24px;
+      color:#fff2ea;
     }
 
     .hero-buttons{
-      display:grid;
+      display:flex;
+      justify-content:center;
       gap:14px;
-      max-width:620px;
-      margin-bottom:18px;
+      flex-wrap:wrap;
+      margin-bottom:34px;
     }
 
     .btn{
-      display:block;
-      padding:18px 20px;
-      border-radius:999px;
-      text-align:center;
-      font-size:clamp(20px,2.5vw,28px);
-      font-weight:800;
+      display:inline-block;
+      min-width:160px;
+      padding:16px 24px;
+      border-radius:14px;
+      font-size:22px;
+      font-weight:700;
       box-shadow:var(--shadow);
     }
 
     .btn-book{
-      background:#fff;
-      color:var(--purple);
+      background:linear-gradient(180deg,#a33cff,#7d22df);
+      color:white;
     }
 
-    .btn-outline{
-      border:3px solid rgba(255,255,255,.96);
-      background:transparent;
-      color:#fff;
+    .btn-call{
+      background:linear-gradient(180deg,#ff5ea8,#d92e87);
+      color:white;
     }
 
-    .hero-grid{
+    .btn-text{
+      background:linear-gradient(180deg,#f4c95d,#d9a82e);
+      color:white;
+    }
+
+    .section-title-row{
       display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
       gap:18px;
+      margin:26px 0 18px;
     }
 
-    .hero-butterfly{
-      text-align:center;
-    }
-
-    .hero-butterfly img{
-      width:min(320px,100%);
-      max-width:100%;
-      object-fit:contain;
-      filter:drop-shadow(0 0 22px rgba(255,216,74,.22));
-    }
-
-    .info-box{
-      background:rgba(255,255,255,.08);
-      border-radius:26px;
-      padding:22px;
-      box-shadow:var(--shadow);
-      border:1px solid rgba(255,255,255,.08);
-    }
-
-    .info-box h3{
-      margin:0 0 12px;
-      color:var(--gold2);
-      font-size:30px;
-    }
-
-    .info-box ul{
-      margin:0;
-      padding-left:22px;
-      font-size:18px;
-      line-height:1.7;
-      color:#fff0d0;
-    }
-
-    .mini-info{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-      margin-top:18px;
-    }
-
-    .mini-card{
-      background:rgba(255,255,255,.08);
-      border-radius:20px;
-      padding:16px;
-      box-shadow:var(--shadow);
-    }
-
-    .mini-card h4{
-      margin:0 0 8px;
-      color:var(--gold2);
-      font-size:20px;
-    }
-
-    .mini-card p{
-      margin:0;
-      font-size:16px;
-      line-height:1.45;
-      color:#fff2d7;
-    }
-
-    section{
-      padding:18px;
+    .section-line{
+      height:2px;
+      background:linear-gradient(90deg, transparent, rgba(255,210,120,.9), transparent);
     }
 
     .section-title{
-      margin:0 0 10px;
-      font-size:clamp(32px,4vw,48px);
-      color:#fff3c4;
-      text-align:center;
+      margin:0;
+      font-size:28px;
+      font-family:Georgia, "Times New Roman", serif;
+      color:#fff1d0;
+      white-space:nowrap;
     }
 
-    .section-sub{
-      margin:0 0 22px;
-      text-align:center;
-      color:#f7e8be;
-      font-size:18px;
-    }
-
-    .service-grid{
+    .services-grid{
       display:grid;
-      gap:20px;
       grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-bottom:34px;
     }
 
     .service-card{
-      width:100%;
       border:none;
-      background:#fff;
-      color:var(--text);
-      border-radius:28px;
+      padding:0;
+      background:transparent;
+      cursor:pointer;
+      text-align:left;
+      box-shadow:var(--shadow);
+      border-radius:18px;
+      overflow:hidden;
+    }
+
+    .service-top{
+      color:white;
+      padding:18px 18px 16px;
+      font-size:18px;
+      font-weight:700;
+      min-height:94px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .service-top span.icon{
+      font-size:34px;
+      line-height:1;
+    }
+
+    .date-night{
+      background:linear-gradient(180deg,#7428d8,#5a17b8);
+    }
+
+    .weekend{
+      background:linear-gradient(180deg,#ff4fa0,#d7397e);
+    }
+
+    .recurring{
+      background:linear-gradient(180deg,#f1c553,#d9a62d);
+    }
+
+    .service-bottom{
+      background:white;
+      color:var(--cardText);
+      padding:18px;
+      font-size:16px;
+      line-height:1.45;
+      text-align:center;
+      min-height:90px;
+    }
+
+    .section-note{
+      text-align:center;
+      color:#ffeac6;
+      font-size:19px;
+      margin:6px 0 24px;
+    }
+
+    .reviews-preview,
+    .areas-preview{
+      text-align:center;
+      color:#fff2dc;
+      font-size:18px;
+      margin-bottom:18px;
+    }
+
+    .hidden-section{
+      margin-top:18px;
+      background:white;
+      color:#24162b;
+      border-radius:26px;
       padding:24px;
       box-shadow:var(--shadow);
-      text-align:left;
-      cursor:pointer;
     }
 
-    .service-card h3{
-      margin:0 0 12px;
-      font-size:32px;
-      line-height:1.1;
+    .hidden-section h3{
+      margin:0 0 10px;
+      font-size:34px;
       color:#111;
     }
 
-    .service-card p{
-      margin:0;
-      font-size:21px;
-      line-height:1.45;
-      color:#222;
+    .hidden-section p{
+      font-size:18px;
+      line-height:1.5;
+      color:#444;
     }
 
-    .areas-box,.reviews-box,.booking-box,.contact-box{
-      background:#fff;
-      color:var(--text);
-      border-radius:28px;
-      padding:26px;
-      box-shadow:var(--shadow);
-    }
-
-    .areas-box h3,.reviews-box h3,.booking-box h3,.contact-box h3{
-      margin:0 0 16px;
-      font-size:38px;
-      line-height:1.1;
-      color:#111;
-    }
-
-    .areas-list{
+    .form-grid{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      margin-top:8px;
-    }
-
-    .area-pill{
-      background:#f7f1ff;
-      color:#35153f;
-      border-radius:999px;
-      padding:12px 14px;
-      font-weight:700;
-      text-align:center;
-      border:1px solid #e7dafd;
-    }
-
-    .review{
-      font-size:21px;
-      line-height:1.6;
-      margin-bottom:16px;
-    }
-
-    .review:last-child{
-      margin-bottom:0;
-    }
-
-    .booking-box form{
-      display:grid;
+      grid-template-columns:1fr 1fr;
       gap:14px;
     }
 
     label{
       display:block;
-      font-size:15px;
+      margin:12px 0 6px;
       font-weight:700;
-      color:#5b5b5b;
-      margin-bottom:4px;
+      color:#444;
     }
 
     input, textarea, select{
       width:100%;
-      padding:14px 16px;
-      border-radius:14px;
-      border:1px solid #d5d5d5;
-      font-size:17px;
+      padding:14px;
+      border:1px solid #ccc;
+      border-radius:12px;
+      font-size:16px;
       font-family:inherit;
-      background:#fff;
     }
 
     textarea{
@@ -373,227 +307,204 @@
       resize:vertical;
     }
 
-    .form-row{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
-
-    .service-detail{
-      margin:0 0 10px;
-      font-size:17px;
-      color:#6a6a6a;
-      line-height:1.45;
-    }
-
-    .recurring-extra{
+    .recurring-fields{
       display:none;
+      margin-top:8px;
       padding:14px;
+      background:#f7f1ff;
+      border:1px solid #e6d8ff;
       border-radius:18px;
-      background:#f8f2ff;
-      border:1px solid #e8dcff;
     }
 
-    .recurring-extra.show{
+    .recurring-fields.show{
       display:block;
     }
 
     .submit-btn{
-      margin-top:4px;
+      display:block;
+      width:100%;
+      margin-top:18px;
       border:none;
-      background:var(--red);
-      color:#fff;
-      font-size:22px;
-      font-weight:800;
-      padding:18px;
       border-radius:18px;
+      background:#ff1f1f;
+      color:white;
+      font-size:22px;
+      font-weight:700;
+      padding:17px;
       cursor:pointer;
     }
 
     .contact-box{
       text-align:center;
-      font-size:22px;
-      line-height:1.8;
+      font-size:24px;
+      line-height:1.9;
     }
 
     .contact-box strong{
-      color:var(--purple);
+      color:#6f12c8;
     }
 
     .footer{
       text-align:center;
-      padding:12px 18px 32px;
-      color:#f4dfb4;
+      color:#f7e0b4;
       font-size:16px;
+      padding:26px 0 10px;
     }
 
-    @media (max-width: 920px){
-      .hero{
+    @media (max-width:900px){
+      .services-grid{
         grid-template-columns:1fr;
       }
-
-      .service-grid{
-        grid-template-columns:1fr;
-      }
-
-      .areas-list{
-        grid-template-columns:1fr 1fr;
+      .headline{
+        font-size:46px;
       }
     }
 
-    @media (max-width: 640px){
-      .form-row,.mini-info{
+    @media (max-width:640px){
+      .brand{
+        font-size:34px;
+      }
+      .headline{
+        font-size:34px;
+      }
+      .subtext{
+        font-size:18px;
+      }
+      .form-grid{
         grid-template-columns:1fr;
       }
-
-      .areas-list{
-        grid-template-columns:1fr;
+      .btn{
+        min-width:0;
+        width:100%;
       }
-
-      .brand img{
-        width:74px;
-        height:74px;
+      .hero-buttons{
+        flex-direction:column;
+      }
+      .section-title-row{
+        grid-template-columns:1fr;
+        gap:8px;
+      }
+      .section-line{
+        display:none;
       }
     }
   </style>
 </head>
 <body>
-  <div class="topbar">
-    Babysitting available in Austin, Pflugerville, Round Rock, Georgetown, Manor, Del Valle, Kyle, Buda, and San Marcos •
-    <a href="tel:15122309391">Call/Text 512-230-9391</a>
-  </div>
-
   <div class="page">
-    <header class="header">
-      <div class="brand">
-        <img src="./butterfly-logo.png" alt="Butterfly logo">
-        <div class="brand-text">
-          <h1>Laya's Babysitting</h1>
-          <p>Loving Care for Your Little Ones</p>
-        </div>
-      </div>
 
+    <div class="top-hero" id="home">
       <button class="menu-btn" onclick="toggleMenu()">☰</button>
-    </header>
 
-    <nav id="menuPanel" class="menu-panel">
-      <a href="#home" onclick="closeMenu()">Home</a>
-      <a href="#services" onclick="closeMenu()">Services</a>
-      <a href="#areas" onclick="closeMenu()">Areas</a>
-      <a href="#book" onclick="closeMenu()">Book Now</a>
-      <a href="#reviews" onclick="closeMenu()">Reviews</a>
-      <a href="#contact" onclick="closeMenu()">Contact</a>
-    </nav>
-
-    <div class="gold-line"></div>
-
-    <section id="home" class="hero">
-      <div class="hero-copy">
-        <h2>Trusted babysitting for busy families.</h2>
-        <p>Safe, dependable childcare with easy booking and loving care for your little ones.</p>
-
-        <div class="hero-buttons">
-          <a class="btn btn-book" href="#book">Book Babysitting</a>
-          <a class="btn btn-outline" href="tel:15122309391">Call</a>
-          <a class="btn btn-outline" href="sms:15122309391">Text</a>
-        </div>
-
-        <div class="mini-info">
-          <div class="mini-card">
-            <h4>Rates</h4>
-            <p>$20–$26 per hour</p>
-          </div>
-          <div class="mini-card">
-            <h4>Booking</h4>
-            <p>Requests go to Gmail and can include recurring dates.</p>
-          </div>
-        </div>
+      <div id="menuPanel" class="menu-panel">
+        <a href="#home" onclick="closeMenu()">Home</a>
+        <a href="#services" onclick="closeMenu()">Services</a>
+        <a href="#areas" onclick="closeMenu()">Areas Served</a>
+        <a href="#reviews" onclick="closeMenu()">Parent Reviews</a>
+        <a href="#book" onclick="closeMenu()">Book Now</a>
+        <a href="#contact" onclick="closeMenu()">Contact</a>
       </div>
 
-      <div class="hero-grid">
-        <div class="hero-butterfly">
-          <img src="./butterfly-logo.png" alt="Butterfly image">
-        </div>
+      <img src="./butterfly-logo.png" alt="Butterfly logo" class="butterfly">
 
-        <div class="info-box">
-          <h3>Quick Info</h3>
-          <ul>
-            <li>Date night, weekend, and recurring weekly care</li>
-            <li>Serving Austin and surrounding areas</li>
-            <li>Zelle, Apple Pay, and Cash accepted</li>
-            <li>Fast call, text, and booking options</li>
-          </ul>
-        </div>
+      <h1 class="brand">Laya’s Babysitting</h1>
+      <div class="tagline">Caring, Fun, and Reliable</div>
+
+      <h2 class="headline">Trusted Babysitting Services</h2>
+      <p class="subtext">Here to care for your little ones while you take a break.</p>
+
+      <div class="hero-buttons">
+        <a class="btn btn-book" href="#book">Book</a>
+        <a class="btn btn-call" href="tel:15122309391">Call</a>
+        <a class="btn btn-text" href="sms:15122309391">Text</a>
       </div>
-    </section>
+    </div>
 
     <section id="services">
-      <h2 class="section-title">Babysitting Services</h2>
-      <p class="section-sub">Tap a card and it will open the right booking setup below.</p>
+      <div class="section-title-row">
+        <div class="section-line"></div>
+        <h2 class="section-title">Our Services</h2>
+        <div class="section-line"></div>
+      </div>
 
-      <div class="service-grid">
+      <div class="services-grid">
         <button class="service-card" onclick="chooseService('Date Night Babysitting')">
-          <h3>Date Night Babysitting</h3>
-          <p>Perfect for parents wanting a night out.</p>
+          <div class="service-top date-night">
+            <span class="icon">🌙</span>
+            <div>Date Night</div>
+          </div>
+          <div class="service-bottom">
+            Evening care for your night out
+          </div>
         </button>
 
         <button class="service-card" onclick="chooseService('Weekend Babysitting')">
-          <h3>Weekend Babysitting</h3>
-          <p>Flexible weekend childcare.</p>
+          <div class="service-top weekend">
+            <span class="icon">☀️</span>
+            <div>Weekend</div>
+          </div>
+          <div class="service-bottom">
+            Babysitting for your weekend plans
+          </div>
         </button>
 
         <button class="service-card" onclick="chooseService('Recurring Weekly Babysitting')">
-          <h3>Recurring Weekly Babysitting</h3>
-          <p>Reliable weekly childcare schedules.</p>
+          <div class="service-top recurring">
+            <span class="icon">📅</span>
+            <div>Recurring Weekly</div>
+          </div>
+          <div class="service-bottom">
+            Regular care on your schedule
+          </div>
         </button>
       </div>
     </section>
 
     <section id="areas">
-      <div class="areas-box">
-        <h3>Areas Served</h3>
-        <div class="areas-list">
-          <div class="area-pill">Austin</div>
-          <div class="area-pill">Pflugerville</div>
-          <div class="area-pill">Round Rock</div>
-          <div class="area-pill">Georgetown</div>
-          <div class="area-pill">Manor</div>
-          <div class="area-pill">Del Valle</div>
-          <div class="area-pill">Kyle</div>
-          <div class="area-pill">Buda</div>
-          <div class="area-pill">San Marcos</div>
-        </div>
+      <div class="section-title-row">
+        <div class="section-line"></div>
+        <h2 class="section-title">Areas Served</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="areas-preview">Providing care in your local neighborhoods</div>
+
+      <div class="hidden-section">
+        <p>Austin • Pflugerville • Round Rock • Georgetown • Manor • Del Valle • Kyle • Buda • San Marcos</p>
       </div>
     </section>
 
     <section id="reviews">
-      <div class="reviews-box">
-        <h3>Parent Reviews</h3>
-        <div class="review">⭐️⭐️⭐️⭐️⭐️ “Amazing babysitter and very reliable.”</div>
-        <div class="review">⭐️⭐️⭐️⭐️⭐️ “My kids loved her!”</div>
+      <div class="section-title-row">
+        <div class="section-line"></div>
+        <h2 class="section-title">Parent Reviews</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="reviews-preview">See what other families have to say</div>
+
+      <div class="hidden-section">
+        <p>⭐⭐⭐⭐⭐ “Amazing babysitter and very reliable.”</p>
+        <p>⭐⭐⭐⭐⭐ “My kids loved her!”</p>
       </div>
     </section>
 
     <section id="book">
-      <div class="booking-box">
+      <div class="hidden-section">
         <h3>Book Babysitting</h3>
-        <p id="serviceDetail" class="service-detail">Choose a service above or book directly here.</p>
+        <p id="serviceMessage">Choose a service card above or fill this out directly.</p>
 
         <form action="https://formsubmit.co/Layacrayton22@gmail.com" method="POST">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
 
-          <div>
-            <label for="serviceType">Service Type</label>
-            <select id="serviceType" name="Service Type" onchange="toggleRecurringFields()">
-              <option value="">Select a service</option>
-              <option value="Date Night Babysitting">Date Night Babysitting</option>
-              <option value="Weekend Babysitting">Weekend Babysitting</option>
-              <option value="Recurring Weekly Babysitting">Recurring Weekly Babysitting</option>
-            </select>
-          </div>
+          <label for="serviceType">Service Type</label>
+          <select id="serviceType" name="Service Type" onchange="toggleRecurringFields()">
+            <option value="">Select a service</option>
+            <option value="Date Night Babysitting">Date Night Babysitting</option>
+            <option value="Weekend Babysitting">Weekend Babysitting</option>
+            <option value="Recurring Weekly Babysitting">Recurring Weekly Babysitting</option>
+          </select>
 
-          <div class="form-row">
+          <div class="form-grid">
             <div>
               <label for="parentName">Parent Name</label>
               <input id="parentName" type="text" name="Parent Name" placeholder="Parent name" required>
@@ -604,19 +515,19 @@
             </div>
           </div>
 
-          <div class="form-row">
-            <div>
-              <label for="emailAddress">Email</label>
-              <input id="emailAddress" type="email" name="Email" placeholder="Email address">
-            </div>
+          <div class="form-grid">
             <div>
               <label for="dateNeeded">Date Needed</label>
               <input id="dateNeeded" type="date" name="Date Needed">
             </div>
+            <div>
+              <label for="hoursNeeded">Hours Needed</label>
+              <input id="hoursNeeded" type="text" name="Hours Needed" placeholder="Example: 4 hours">
+            </div>
           </div>
 
-          <div id="recurringFields" class="recurring-extra">
-            <div class="form-row">
+          <div id="recurringFields" class="recurring-fields">
+            <div class="form-grid">
               <div>
                 <label for="recurringDays">Recurring Days Wanted</label>
                 <input id="recurringDays" type="text" name="Recurring Days Wanted" placeholder="Example: Mondays and Wednesdays">
@@ -627,16 +538,12 @@
               </div>
             </div>
 
-            <div style="margin-top:14px">
-              <label for="recurringEnd">Recurring End Date</label>
-              <input id="recurringEnd" type="date" name="Recurring End Date">
-            </div>
+            <label for="recurringEnd">Recurring End Date</label>
+            <input id="recurringEnd" type="date" name="Recurring End Date">
           </div>
 
-          <div>
-            <label for="notes">Child Ages, Hours, Location</label>
-            <textarea id="notes" name="Notes" placeholder="Child ages, hours, location"></textarea>
-          </div>
+          <label for="notes">Child Ages, Hours, Location</label>
+          <textarea id="notes" name="Notes" placeholder="Child ages, hours, location"></textarea>
 
           <button class="submit-btn" type="submit">Send Booking Request</button>
         </form>
@@ -644,7 +551,7 @@
     </section>
 
     <section id="contact">
-      <div class="contact-box">
+      <div class="hidden-section contact-box">
         <h3>Contact</h3>
         <div><strong>Phone:</strong> 512-230-9391</div>
         <div><strong>Email:</strong> Layacrayton22@gmail.com</div>
@@ -652,7 +559,7 @@
       </div>
     </section>
 
-    <div class="footer">Laya's Babysitting • Austin Area Babysitting</div>
+    <div class="footer">Laya’s Babysitting • Austin Area Babysitting</div>
   </div>
 
   <script>
@@ -666,18 +573,16 @@
 
     function chooseService(service){
       const select = document.getElementById('serviceType');
-      const detail = document.getElementById('serviceDetail');
+      const message = document.getElementById('serviceMessage');
 
       select.value = service;
 
       if(service === 'Date Night Babysitting'){
-        detail.textContent = 'Date night selected. Use the date field for the night you want.';
+        message.textContent = 'Date Night selected. Add the night you want in the date field.';
       } else if(service === 'Weekend Babysitting'){
-        detail.textContent = 'Weekend babysitting selected. Use the date field for the weekend day you want.';
+        message.textContent = 'Weekend selected. Add the weekend date you want.';
       } else if(service === 'Recurring Weekly Babysitting'){
-        detail.textContent = 'Recurring weekly selected. Add the recurring days you want plus a start and end date.';
-      } else {
-        detail.textContent = 'Choose a service above or book directly here.';
+        message.textContent = 'Recurring Weekly selected. Add the recurring days you want plus start and end dates.';
       }
 
       toggleRecurringFields();
