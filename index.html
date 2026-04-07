@@ -9,140 +9,118 @@
 
 body{
 margin:0;
-font-family:Arial;
+font-family:Arial, Helvetica, sans-serif;
+background:linear-gradient(180deg,#3a0a4f,#7a0f36,#2b0822);
 color:white;
-background:linear-gradient(135deg,#3b0b4f,#7a004b,#ff3c00);
 }
 
-/* top bar */
-
 .topbar{
-background:#2a0837;
 text-align:center;
-padding:10px;
-font-size:14px;
+padding:12px;
+background:#220432;
+font-size:16px;
 }
 
 .topbar a{
 color:gold;
-text-decoration:none;
 font-weight:bold;
 }
 
-/* header */
-
-.header{
-display:flex;
-align-items:center;
-justify-content:space-between;
+header{
 padding:20px;
+text-align:center;
 }
 
 .logo{
-display:flex;
-align-items:center;
-gap:10px;
+width:120px;
+border-radius:50%;
+background:white;
+padding:6px;
 }
 
-.logo img{
-width:60px;
-}
-
-.logo h1{
-margin:0;
-font-size:24px;
+h1{
+font-size:40px;
 color:gold;
+margin:10px 0;
 }
 
-.menu{
-font-size:30px;
-cursor:pointer;
+.tag{
+font-size:20px;
 }
-
-/* hero */
 
 .hero{
+text-align:center;
 padding:40px 20px;
 }
 
-.hero h2{
-font-size:40px;
-margin-bottom:10px;
-}
-
-.hero p{
-font-size:18px;
-line-height:1.5;
-}
-
-/* buttons */
-
-.btn{
-display:block;
-margin:10px 0;
-padding:16px;
+button{
+padding:16px 30px;
 border-radius:40px;
-text-align:center;
-font-size:18px;
-text-decoration:none;
-font-weight:bold;
+border:none;
+font-size:20px;
+margin:10px;
+cursor:pointer;
 }
 
 .book{
-background:white;
-color:#7a00cc;
-}
-
-.call{
-border:2px solid white;
+background:red;
 color:white;
 }
 
-.text{
-border:2px solid white;
+.learn{
+background:purple;
 color:white;
 }
 
-/* cards */
-
-.section{
-padding:20px;
+section{
+padding:40px 20px;
+max-width:900px;
+margin:auto;
 }
 
 .card{
 background:white;
 color:black;
+padding:25px;
 border-radius:20px;
-padding:20px;
-margin-bottom:20px;
+margin:15px 0;
 }
 
-/* form */
+.card h3{
+color:red;
+}
+
+form{
+background:white;
+color:black;
+padding:25px;
+border-radius:20px;
+}
 
 input, textarea{
 width:100%;
 padding:12px;
-margin:6px 0;
+margin:8px 0;
 border-radius:10px;
-border:none;
-}
-
-button{
-width:100%;
-padding:15px;
-border:none;
-border-radius:20px;
-background:#ff2f00;
-color:white;
-font-size:18px;
-}
-
-/* footer */
-
-.footer{
-text-align:center;
-padding:20px;
+border:1px solid #ccc;
 font-size:16px;
+}
+
+.submit{
+background:red;
+color:white;
+font-size:20px;
+padding:15px;
+border-radius:30px;
+border:none;
+cursor:pointer;
+}
+
+footer{
+text-align:center;
+padding:30px;
+background:#220432;
+margin-top:40px;
 }
 
 </style>
@@ -151,37 +129,34 @@ font-size:16px;
 <body>
 
 <div class="topbar">
-Babysitting available in Austin, Pflugerville, Round Rock, Georgetown, Manor, Del Valle, Kyle, Buda, and San Marcos •
-<a href="tel:15122309391">Call/Text 512-230-9391</a>
+Babysitting in Austin • Pflugerville • Round Rock • Georgetown • Manor • Del Valle • Kyle • Buda • San Marcos  
+<br>
+<a href="tel:5122309391">Call/Text 512-230-9391</a>
 </div>
 
-<div class="header">
+<header>
 
-<div class="logo">
-<img src="butterfly-logo.png">
+<img src="butterfly-logo.png" class="logo">
+
 <h1>Laya's Babysitting</h1>
-</div>
 
-<div class="menu">☰</div>
+<div class="tag">Loving Care for Your Little Ones</div>
 
-</div>
+</header>
 
 <div class="hero">
 
-<h2>Trusted babysitting for busy families.</h2>
+<p>Safe, dependable childcare with easy booking and loving care.</p>
 
-<p>
-Safe, dependable childcare with easy booking, clear communication,
-and loving care for your little ones.
-</p>
+<button class="learn" onclick="document.getElementById('services').scrollIntoView()">Learn More</button>
 
-<a class="btn book" href="#book">Book Babysitting</a>
-<a class="btn call" href="tel:15122309391">Call</a>
-<a class="btn text" href="sms:15122309391">Text</a>
+<button class="book" onclick="document.getElementById('booking').scrollIntoView()">Book Now</button>
 
 </div>
 
-<div class="section">
+<section id="services">
+
+<h2>Babysitting Services</h2>
 
 <div class="card">
 <h3>Date Night Babysitting</h3>
@@ -198,38 +173,95 @@ and loving care for your little ones.
 <p>Ongoing babysitting depending on schedule availability.</p>
 </div>
 
-</div>
+</section>
 
-<div class="section" id="book">
+<section>
 
-<div class="card">
+<h2>Service Areas</h2>
+
+<p>
+Austin • Pflugerville • Round Rock • Georgetown • Manor • Del Valle • Kyle • Buda • San Marcos
+</p>
+
+</section>
+
+<section id="booking">
 
 <h2>Book Babysitting</h2>
 
-<form action="mailto:layacrayton22@gmail.com" method="post" enctype="text/plain">
+<form action="https://formsubmit.co/Layacrayton22@gmail.com" method="POST">
 
-<input type="text" name="Name" placeholder="Parent name" required>
+<input type="hidden" name="_captcha" value="false">
 
-<input type="text" name="Phone" placeholder="Phone number">
+<input type="text" name="Name" placeholder="Your Name" required>
 
-<input type="date" name="Date">
+<input type="tel" name="Phone" placeholder="Phone Number" required>
 
-<textarea name="Notes" placeholder="Child ages, hours, location"></textarea>
+<input type="email" name="Email" placeholder="Email">
 
-<button type="submit">Send Booking Request</button>
+<input type="date" name="Date Needed" required>
+
+<input type="time" name="Start Time">
+
+<input type="number" name="Hours Needed" placeholder="Hours Needed">
+
+<textarea name="Notes" placeholder="Child ages, location, or notes"></textarea>
+
+<button class="submit">Send Booking Request</button>
 
 </form>
 
+<p>
+Booking requests go directly to Gmail:
+<br>
+<strong>Layacrayton22@gmail.com</strong>
+</p>
+
+</section>
+
+<section>
+
+<h2>Reviews</h2>
+
+<div class="card">
+★★★★★  
+"Laya was amazing with our kids!"
 </div>
 
+<div class="card">
+★★★★★  
+"Very reliable and professional."
 </div>
 
-<div class="footer">
-
-<p>Gmail: layacrayton22@gmail.com</p>
-<p>Rate: $20–$26 per hour</p>
-
+<div class="card">
+★★★★★  
+"Our kids loved her!"
 </div>
+
+</section>
+
+<section>
+
+<h2>Map</h2>
+
+<iframe
+width="100%"
+height="350"
+style="border:0;border-radius:20px;"
+src="https://www.google.com/maps?q=Austin%20Texas&output=embed">
+</iframe>
+
+</section>
+
+<footer>
+
+<p><strong>Laya's Babysitting</strong></p>
+
+<p>Phone: 512-230-9391</p>
+
+<p>Email: Layacrayton22@gmail.com</p>
+
+</footer>
 
 </body>
 </html>
