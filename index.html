@@ -5,19 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Laya's Babysitting</title>
   <meta name="description" content="Trusted babysitting in Austin, Pflugerville, Round Rock, Georgetown, Manor, Del Valle, Kyle, Buda, and San Marcos." />
-
   <style>
     :root{
-      --bg1:#2c0040;
-      --bg2:#5d0078;
-      --bg3:#a30062;
-      --pink:#ff66c4;
-      --gold:#f6cf63;
-      --gold2:#ffd84a;
-      --purple:#8b3dff;
+      --bg1:#2a0038;
+      --bg2:#5b0a7a;
+      --bg3:#a21a78;
+      --panel:#4a0a63;
+      --panel-dark:#330043;
+      --gold:#f3d06b;
       --white:#ffffff;
-      --cardText:#2d2134;
-      --shadow:0 12px 30px rgba(0,0,0,.20);
+      --pink:#d94ea8;
+      --purple:#9d4dff;
+      --red:#d63b8f;
+      --text:#2a1d32;
+      --shadow:0 10px 26px rgba(0,0,0,.22);
     }
 
     *{box-sizing:border-box}
@@ -26,112 +27,109 @@
     body{
       margin:0;
       font-family:Arial, Helvetica, sans-serif;
-      color:white;
+      color:#fff;
       background:
-        radial-gradient(circle at 10% 12%, rgba(255,255,255,.22) 0 1px, transparent 2px),
-        radial-gradient(circle at 70% 22%, rgba(255,215,0,.18) 0 1px, transparent 2px),
-        radial-gradient(circle at 35% 70%, rgba(255,255,255,.18) 0 1px, transparent 2px),
-        radial-gradient(circle at 85% 80%, rgba(255,215,0,.18) 0 1px, transparent 2px),
+        radial-gradient(circle at 10% 12%, rgba(255,255,255,.28) 0 1px, transparent 2px),
+        radial-gradient(circle at 30% 28%, rgba(255,214,102,.20) 0 1px, transparent 2px),
+        radial-gradient(circle at 75% 20%, rgba(255,255,255,.22) 0 1px, transparent 2px),
+        radial-gradient(circle at 60% 70%, rgba(255,214,102,.18) 0 1px, transparent 2px),
         linear-gradient(180deg,var(--bg1),var(--bg2),var(--bg3));
-      background-size:38px 38px, 52px 52px, 64px 64px, 58px 58px, auto;
+      background-size:34px 34px, 48px 48px, 42px 42px, 56px 56px, auto;
     }
 
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
+    a{text-decoration:none;color:inherit}
 
     .page{
-      max-width:1100px;
+      max-width:1150px;
       margin:0 auto;
-      padding:0 18px 40px;
+      padding:24px 18px 50px;
     }
 
-    .top-hero{
+    .hero{
       position:relative;
       text-align:center;
-      padding:32px 0 28px;
+      padding:12px 0 20px;
     }
 
     .menu-btn{
       position:absolute;
-      right:0;
-      top:28px;
-      background:none;
+      right:8px;
+      top:6px;
       border:none;
-      color:white;
-      font-size:38px;
+      background:none;
+      color:#fff;
+      font-size:42px;
       cursor:pointer;
       width:auto;
-      padding:0 8px;
+      padding:6px 8px;
+      line-height:1;
     }
 
     .menu-panel{
       display:none;
       position:absolute;
-      right:0;
-      top:76px;
+      right:8px;
+      top:62px;
       width:240px;
-      background:rgba(39,0,51,.96);
-      border-radius:22px;
-      padding:16px 18px;
-      box-shadow:var(--shadow);
+      background:rgba(40,0,55,.96);
+      border-radius:20px;
+      padding:14px 18px;
       text-align:left;
+      box-shadow:var(--shadow);
       z-index:20;
     }
 
-    .menu-panel.show{
-      display:block;
-    }
+    .menu-panel.show{display:block}
 
     .menu-panel a{
       display:block;
-      color:#ffe7a3;
-      font-size:20px;
+      color:#ffe8a0;
       font-weight:700;
+      font-size:20px;
       padding:10px 0;
     }
 
-    .butterfly{
+    .logo{
       width:120px;
       height:120px;
       object-fit:cover;
       border-radius:50%;
-      background:white;
+      background:#fff;
       padding:6px;
-      box-shadow:0 0 22px rgba(255,255,255,.20);
-      margin-bottom:10px;
+      box-shadow:0 0 22px rgba(255,255,255,.16);
+      margin-bottom:12px;
     }
 
     .brand{
-      font-size:48px;
-      font-weight:700;
-      color:#ffe3f7;
       margin:0;
+      font-size:60px;
       font-family:Georgia, "Times New Roman", serif;
-      text-shadow:0 0 16px rgba(255,255,255,.10);
+      font-style:italic;
+      font-weight:500;
+      color:#fff2fb;
+      text-shadow:0 0 18px rgba(255,255,255,.12);
     }
 
     .tagline{
-      margin:8px 0 28px;
-      font-size:18px;
-      color:#ffeab5;
+      margin:8px 0 34px;
+      font-size:19px;
+      color:#ffe9ad;
     }
 
     .headline{
-      font-size:58px;
-      line-height:1.06;
       margin:0 0 12px;
+      font-size:62px;
+      line-height:1.08;
       font-family:Georgia, "Times New Roman", serif;
-      color:#fff7e5;
+      color:#fff7e8;
     }
 
     .subtext{
-      font-size:21px;
-      line-height:1.5;
+      margin:0 auto 28px;
       max-width:760px;
-      margin:0 auto 24px;
-      color:#fff2ea;
+      font-size:22px;
+      line-height:1.5;
+      color:#fff1ea;
     }
 
     .hero-buttons{
@@ -145,50 +143,57 @@
     .btn{
       display:inline-block;
       min-width:160px;
-      padding:16px 24px;
-      border-radius:14px;
+      padding:16px 28px;
+      border-radius:12px;
       font-size:22px;
       font-weight:700;
       box-shadow:var(--shadow);
     }
 
     .btn-book{
-      background:linear-gradient(180deg,#a33cff,#7d22df);
-      color:white;
+      background:linear-gradient(180deg,#b14cff,#7a23dc);
+      color:#fff;
     }
 
     .btn-call{
-      background:linear-gradient(180deg,#ff5ea8,#d92e87);
-      color:white;
+      background:linear-gradient(180deg,#e34ea2,#bd2f78);
+      color:#fff;
     }
 
     .btn-text{
-      background:linear-gradient(180deg,#f4c95d,#d9a82e);
-      color:white;
+      background:linear-gradient(180deg,#efc75f,#d9a12d);
+      color:#fff;
     }
 
-    .section-title-row{
+    .title-row{
       display:grid;
       grid-template-columns:1fr auto 1fr;
+      gap:16px;
       align-items:center;
-      gap:18px;
-      margin:26px 0 18px;
+      margin:18px 0 18px;
     }
 
-    .section-line{
+    .line{
       height:2px;
-      background:linear-gradient(90deg, transparent, rgba(255,210,120,.9), transparent);
+      background:linear-gradient(90deg, transparent, rgba(255,232,160,.95), transparent);
     }
 
     .section-title{
       margin:0;
-      font-size:28px;
       font-family:Georgia, "Times New Roman", serif;
-      color:#fff1d0;
+      font-size:32px;
+      color:#fff3d0;
       white-space:nowrap;
     }
 
-    .services-grid{
+    .section-sub{
+      text-align:center;
+      font-size:20px;
+      color:#fff2da;
+      margin:0 0 22px;
+    }
+
+    .services{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:18px;
@@ -198,105 +203,92 @@
     .service-card{
       border:none;
       padding:0;
-      background:transparent;
-      cursor:pointer;
-      text-align:left;
-      box-shadow:var(--shadow);
+      background:none;
       border-radius:18px;
       overflow:hidden;
+      box-shadow:var(--shadow);
+      cursor:pointer;
+      text-align:left;
     }
 
     .service-top{
-      color:white;
-      padding:18px 18px 16px;
-      font-size:18px;
-      font-weight:700;
-      min-height:94px;
+      padding:18px 18px 14px;
+      min-height:96px;
       display:flex;
       align-items:center;
       gap:10px;
+      color:#fff;
+      font-weight:700;
+      font-size:18px;
     }
 
-    .service-top span.icon{
+    .service-icon{
       font-size:34px;
       line-height:1;
+      flex-shrink:0;
     }
 
-    .date-night{
-      background:linear-gradient(180deg,#7428d8,#5a17b8);
-    }
-
-    .weekend{
-      background:linear-gradient(180deg,#ff4fa0,#d7397e);
-    }
-
-    .recurring{
-      background:linear-gradient(180deg,#f1c553,#d9a62d);
-    }
+    .service-top.date{background:linear-gradient(180deg,#7e2de3,#6222be)}
+    .service-top.weekend{background:linear-gradient(180deg,#e84c9d,#c7377f)}
+    .service-top.recurring{background:linear-gradient(180deg,#efc75f,#d9a12d)}
 
     .service-bottom{
-      background:white;
-      color:var(--cardText);
-      padding:18px;
+      background:#fff;
+      color:var(--text);
+      text-align:center;
+      padding:18px 16px;
+      min-height:88px;
       font-size:16px;
       line-height:1.45;
-      text-align:center;
-      min-height:90px;
     }
 
-    .section-note{
-      text-align:center;
-      color:#ffeac6;
-      font-size:19px;
-      margin:6px 0 24px;
+    .box{
+      background:rgba(255,255,255,.08);
+      border-radius:22px;
+      padding:18px 20px;
+      box-shadow:var(--shadow);
+      margin-bottom:26px;
     }
 
-    .reviews-preview,
-    .areas-preview{
+    .areas-text,.reviews-text{
       text-align:center;
-      color:#fff2dc;
-      font-size:18px;
-      margin-bottom:18px;
+      font-size:20px;
+      color:#fff2dd;
     }
 
-    .hidden-section{
+    .booking-wrap{
       margin-top:18px;
-      background:white;
-      color:#24162b;
-      border-radius:26px;
+      background:#fff;
+      color:#24182b;
+      border-radius:24px;
       padding:24px;
       box-shadow:var(--shadow);
     }
 
-    .hidden-section h3{
+    .booking-wrap h3{
       margin:0 0 10px;
       font-size:34px;
       color:#111;
     }
 
-    .hidden-section p{
-      font-size:18px;
-      line-height:1.5;
-      color:#444;
-    }
-
-    .form-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
+    .booking-note{
+      margin:0 0 14px;
+      color:#666;
+      font-size:17px;
     }
 
     label{
       display:block;
       margin:12px 0 6px;
+      font-size:15px;
       font-weight:700;
-      color:#444;
+      color:#555;
     }
 
     input, textarea, select{
       width:100%;
       padding:14px;
-      border:1px solid #ccc;
+      border:1px solid #d5d5d5;
       border-radius:12px;
       font-size:16px;
       font-family:inherit;
@@ -307,27 +299,30 @@
       resize:vertical;
     }
 
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
     .recurring-fields{
       display:none;
-      margin-top:8px;
+      margin-top:12px;
       padding:14px;
-      background:#f7f1ff;
-      border:1px solid #e6d8ff;
+      background:#f7f0ff;
+      border:1px solid #e4d9ff;
       border-radius:18px;
     }
 
-    .recurring-fields.show{
-      display:block;
-    }
+    .recurring-fields.show{display:block}
 
     .submit-btn{
-      display:block;
-      width:100%;
       margin-top:18px;
+      width:100%;
       border:none;
       border-radius:18px;
       background:#ff1f1f;
-      color:white;
+      color:#fff;
       font-size:22px;
       font-weight:700;
       padding:17px;
@@ -335,6 +330,11 @@
     }
 
     .contact-box{
+      background:#fff;
+      color:#24182b;
+      border-radius:24px;
+      padding:24px;
+      box-shadow:var(--shadow);
       text-align:center;
       font-size:24px;
       line-height:1.9;
@@ -346,46 +346,58 @@
 
     .footer{
       text-align:center;
-      color:#f7e0b4;
+      color:#f5dfb0;
       font-size:16px;
-      padding:26px 0 10px;
+      padding:24px 0 8px;
     }
 
     @media (max-width:900px){
-      .services-grid{
+      .services{
         grid-template-columns:1fr;
       }
+
       .headline{
+        font-size:46px;
+      }
+
+      .brand{
         font-size:46px;
       }
     }
 
     @media (max-width:640px){
-      .brand{
-        font-size:34px;
-      }
-      .headline{
-        font-size:34px;
-      }
-      .subtext{
-        font-size:18px;
-      }
       .form-grid{
         grid-template-columns:1fr;
       }
+
+      .hero-buttons{
+        flex-direction:column;
+      }
+
       .btn{
         min-width:0;
         width:100%;
       }
-      .hero-buttons{
-        flex-direction:column;
-      }
-      .section-title-row{
+
+      .title-row{
         grid-template-columns:1fr;
         gap:8px;
       }
-      .section-line{
+
+      .line{
         display:none;
+      }
+
+      .headline{
+        font-size:34px;
+      }
+
+      .subtext{
+        font-size:18px;
+      }
+
+      .brand{
+        font-size:34px;
       }
     }
   </style>
@@ -393,7 +405,7 @@
 <body>
   <div class="page">
 
-    <div class="top-hero" id="home">
+    <div class="hero" id="home">
       <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
       <div id="menuPanel" class="menu-panel">
@@ -405,7 +417,7 @@
         <a href="#contact" onclick="closeMenu()">Contact</a>
       </div>
 
-      <img src="./butterfly-logo.png" alt="Butterfly logo" class="butterfly">
+      <img src="./butterfly-logo.png" alt="Butterfly logo" class="logo">
 
       <h1 class="brand">Laya’s Babysitting</h1>
       <div class="tagline">Caring, Fun, and Reliable</div>
@@ -421,76 +433,71 @@
     </div>
 
     <section id="services">
-      <div class="section-title-row">
-        <div class="section-line"></div>
+      <div class="title-row">
+        <div class="line"></div>
         <h2 class="section-title">Our Services</h2>
-        <div class="section-line"></div>
+        <div class="line"></div>
       </div>
 
-      <div class="services-grid">
+      <div class="services">
         <button class="service-card" onclick="chooseService('Date Night Babysitting')">
-          <div class="service-top date-night">
-            <span class="icon">🌙</span>
+          <div class="service-top date">
+            <div class="service-icon">🌙</div>
             <div>Date Night</div>
           </div>
-          <div class="service-bottom">
-            Evening care for your night out
-          </div>
+          <div class="service-bottom">Evening care for your night out</div>
         </button>
 
         <button class="service-card" onclick="chooseService('Weekend Babysitting')">
           <div class="service-top weekend">
-            <span class="icon">☀️</span>
+            <div class="service-icon">☀️</div>
             <div>Weekend</div>
           </div>
-          <div class="service-bottom">
-            Babysitting for your weekend plans
-          </div>
+          <div class="service-bottom">Babysitting for your weekend plans</div>
         </button>
 
         <button class="service-card" onclick="chooseService('Recurring Weekly Babysitting')">
           <div class="service-top recurring">
-            <span class="icon">📅</span>
+            <div class="service-icon">📅</div>
             <div>Recurring Weekly</div>
           </div>
-          <div class="service-bottom">
-            Regular care on your schedule
-          </div>
+          <div class="service-bottom">Regular care on your schedule</div>
         </button>
       </div>
     </section>
 
     <section id="areas">
-      <div class="section-title-row">
-        <div class="section-line"></div>
+      <div class="title-row">
+        <div class="line"></div>
         <h2 class="section-title">Areas Served</h2>
-        <div class="section-line"></div>
+        <div class="line"></div>
       </div>
-      <div class="areas-preview">Providing care in your local neighborhoods</div>
+      <div class="section-sub">Providing care in your local neighborhoods</div>
 
-      <div class="hidden-section">
-        <p>Austin • Pflugerville • Round Rock • Georgetown • Manor • Del Valle • Kyle • Buda • San Marcos</p>
+      <div class="box areas-text">
+        Austin • Pflugerville • Round Rock • Georgetown • Manor • Del Valle • Kyle • Buda • San Marcos
       </div>
     </section>
 
     <section id="reviews">
-      <div class="section-title-row">
-        <div class="section-line"></div>
+      <div class="title-row">
+        <div class="line"></div>
         <h2 class="section-title">Parent Reviews</h2>
-        <div class="section-line"></div>
+        <div class="line"></div>
       </div>
-      <div class="reviews-preview">See what other families have to say</div>
+      <div class="section-sub">See what other families have to say</div>
 
-      <div class="hidden-section">
-        <p>⭐⭐⭐⭐⭐ “Amazing babysitter and very reliable.”</p>
-        <p>⭐⭐⭐⭐⭐ “My kids loved her!”</p>
+      <div class="box reviews-text">
+        <div>⭐⭐⭐⭐⭐ “Amazing babysitter and very reliable.”</div>
+        <br>
+        <div>⭐⭐⭐⭐⭐ “My kids loved her!”</div>
       </div>
     </section>
 
     <section id="book">
-      <div class="hidden-section">
+      <div class="booking-wrap">
         <h3>Book Babysitting</h3>
-        <p id="serviceMessage">Choose a service card above or fill this out directly.</p>
+        <p id="serviceMessage" class="booking-note">Choose a service card above or fill this out directly.</p>
 
         <form action="https://formsubmit.co/Layacrayton22@gmail.com" method="POST">
           <input type="hidden" name="_captcha" value="false">
@@ -551,7 +558,7 @@
     </section>
 
     <section id="contact">
-      <div class="hidden-section contact-box">
+      <div class="contact-box">
         <h3>Contact</h3>
         <div><strong>Phone:</strong> 512-230-9391</div>
         <div><strong>Email:</strong> Layacrayton22@gmail.com</div>
