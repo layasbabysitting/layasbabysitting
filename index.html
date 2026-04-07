@@ -3,6 +3,7 @@
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Laya's Babysitting</title>
 
 <style>
@@ -11,10 +12,10 @@ body{
 margin:0;
 font-family:Arial;
 color:white;
-background:linear-gradient(180deg,#2d0040,#5a0070,#900048);
+background:linear-gradient(180deg,#2b0040,#630080,#a00050);
 }
 
-/* sparkles */
+/* sparkle background */
 
 body:before{
 content:"";
@@ -45,8 +46,8 @@ gap:12px;
 }
 
 .logo img{
-width:70px;
-height:70px;
+width:65px;
+height:65px;
 border-radius:50%;
 background:white;
 padding:6px;
@@ -54,24 +55,26 @@ padding:6px;
 
 .logo h1{
 margin:0;
-font-size:28px;
 color:gold;
+font-size:26px;
 }
 
 .menu{
-font-size:30px;
+font-size:32px;
+cursor:pointer;
 }
 
-/* nav */
+/* menu panel */
 
-.nav{
+.menu-panel{
+display:none;
 background:#3b003f;
+margin:15px;
+border-radius:18px;
 padding:20px;
-border-radius:20px;
-margin:20px;
 }
 
-.nav a{
+.menu-panel a{
 display:block;
 color:#f5d98d;
 text-decoration:none;
@@ -82,15 +85,15 @@ margin:10px 0;
 /* hero */
 
 .hero{
-padding:30px;
+padding:25px;
 }
 
 .hero h2{
-font-size:42px;
+font-size:38px;
 }
 
 .hero p{
-font-size:20px;
+font-size:18px;
 }
 
 /* buttons */
@@ -121,9 +124,9 @@ border:2px solid white;
 color:white;
 }
 
-/* services */
+/* cards */
 
-.services{
+.section{
 padding:20px;
 }
 
@@ -133,17 +136,37 @@ color:black;
 border-radius:20px;
 padding:20px;
 margin-bottom:20px;
+cursor:pointer;
 }
 
 .card h3{
 margin-top:0;
 }
 
-/* footer */
+/* hidden content */
 
-.footer{
-text-align:center;
-padding:40px;
+.hidden{
+display:none;
+}
+
+/* form */
+
+input,textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:10px;
+border:1px solid #ccc;
+}
+
+button{
+margin-top:15px;
+padding:15px;
+background:red;
+color:white;
+border:none;
+border-radius:14px;
+font-size:18px;
 }
 
 </style>
@@ -160,18 +183,16 @@ padding:40px;
 
 <div>
 <h1>Laya's Babysitting</h1>
-<div style="font-size:16px;color:#f7e3a1;">
-Loving Care for Your Little Ones
-</div>
+<div style="font-size:14px;color:#f7e3a1;">Loving Care for Your Little Ones</div>
 </div>
 
 </div>
 
-<div class="menu">☰</div>
+<div class="menu" onclick="toggleMenu()">☰</div>
 
 </div>
 
-<div class="nav">
+<div class="menu-panel" id="menu">
 
 <a href="#home">Home</a>
 <a href="#services">Services</a>
@@ -198,30 +219,62 @@ Safe, dependable childcare with easy booking and loving care for your little one
 
 </div>
 
-<div class="services" id="services">
+<div class="section" id="services">
 
-<div class="card">
+<div class="card" onclick="toggleSection('date')">
+
 <h3>Date Night Babysitting</h3>
 <p>Perfect for parents wanting a night out.</p>
+
+<div id="date" class="hidden">
+<p>Book babysitting for evenings and nights.</p>
 </div>
 
-<div class="card">
+</div>
+
+<div class="card" onclick="toggleSection('weekend')">
+
 <h3>Weekend Babysitting</h3>
 <p>Flexible weekend childcare.</p>
+
+<div id="weekend" class="hidden">
+<p>Available Saturdays and Sundays.</p>
 </div>
 
-<div class="card">
+</div>
+
+<div class="card" onclick="toggleSection('recurring')">
+
 <h3>Recurring Weekly Babysitting</h3>
 <p>Reliable weekly childcare schedules.</p>
+
+<div id="recurring" class="hidden">
+
+<form>
+
+<label>Days Needed</label>
+<input type="text" placeholder="Example: Mondays and Wednesdays">
+
+<label>Start Date</label>
+<input type="date">
+
+<label>End Date</label>
+<input type="date">
+
+</form>
+
+</div>
+
 </div>
 
 </div>
 
-<div class="services" id="areas">
+<div class="section" id="areas">
 
 <div class="card">
+
 <h3>Areas Served</h3>
-<p>
+
 Austin<br>
 Pflugerville<br>
 Round Rock<br>
@@ -231,22 +284,25 @@ Del Valle<br>
 Kyle<br>
 Buda<br>
 San Marcos
-</p>
-</div>
 
 </div>
 
-<div class="services" id="reviews">
+</div>
+
+<div class="section" id="reviews">
 
 <div class="card">
+
 <h3>Parent Reviews</h3>
-<p>⭐️⭐️⭐️⭐️⭐️ “Amazing babysitter and very reliable.”</p>
-<p>⭐️⭐️⭐️⭐️⭐️ “My kids loved her!”</p>
-</div>
+
+⭐️⭐️⭐️⭐️⭐️ “Amazing babysitter and very reliable.”<br><br>
+⭐️⭐️⭐️⭐️⭐️ “My kids loved her!”
 
 </div>
 
-<div class="services" id="book">
+</div>
+
+<div class="section" id="book">
 
 <div class="card">
 
@@ -254,19 +310,15 @@ San Marcos
 
 <form action="https://formsubmit.co/Layacrayton22@gmail.com" method="POST">
 
-<input type="hidden" name="_captcha" value="false">
+<input type="text" placeholder="Parent name">
 
-<input type="text" name="Name" placeholder="Parent name" required>
+<input type="text" placeholder="Phone number">
 
-<input type="text" name="Phone" placeholder="Phone number">
+<input type="date">
 
-<input type="date" name="Date">
+<textarea placeholder="Child ages, hours, location"></textarea>
 
-<textarea name="Notes" placeholder="Child ages, hours, location"></textarea>
-
-<button style="padding:15px;background:red;color:white;border:none;border-radius:15px;">
-Send Booking Request
-</button>
+<button>Send Booking Request</button>
 
 </form>
 
@@ -274,13 +326,47 @@ Send Booking Request
 
 </div>
 
-<div class="footer" id="contact">
+<div class="section" id="contact">
 
-<p>Email: Layacrayton22@gmail.com</p>
-<p>Phone: 512-230-9391</p>
-<p>Rate: $20-$26 per hour</p>
+<div class="card">
+
+<h3>Contact</h3>
+
+Phone: 512-230-9391<br>
+Email: Layacrayton22@gmail.com<br>
+Rate: $20-$26/hr
 
 </div>
+
+</div>
+
+<script>
+
+function toggleMenu(){
+
+var menu=document.getElementById("menu");
+
+if(menu.style.display==="block"){
+menu.style.display="none";
+}else{
+menu.style.display="block";
+}
+
+}
+
+function toggleSection(id){
+
+var section=document.getElementById(id);
+
+if(section.style.display==="block"){
+section.style.display="none";
+}else{
+section.style.display="block";
+}
+
+}
+
+</script>
 
 </body>
 </html>
