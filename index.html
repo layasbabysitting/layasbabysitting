@@ -3,7 +3,6 @@
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Laya's Babysitting</title>
 
 <style>
@@ -61,10 +60,9 @@ color:gold;
 
 .menu{
 font-size:30px;
-cursor:pointer;
 }
 
-/* dropdown */
+/* nav */
 
 .nav{
 background:#3b003f;
@@ -78,7 +76,7 @@ display:block;
 color:#f5d98d;
 text-decoration:none;
 font-size:20px;
-margin:12px 0;
+margin:10px 0;
 }
 
 /* hero */
@@ -88,8 +86,7 @@ padding:30px;
 }
 
 .hero h2{
-font-size:44px;
-line-height:1.1;
+font-size:42px;
 }
 
 .hero p{
@@ -124,6 +121,31 @@ border:2px solid white;
 color:white;
 }
 
+/* services */
+
+.services{
+padding:20px;
+}
+
+.card{
+background:white;
+color:black;
+border-radius:20px;
+padding:20px;
+margin-bottom:20px;
+}
+
+.card h3{
+margin-top:0;
+}
+
+/* footer */
+
+.footer{
+text-align:center;
+padding:40px;
+}
+
 </style>
 
 </head>
@@ -134,7 +156,7 @@ color:white;
 
 <div class="logo">
 
-<img src="./butterfly-logo.png">
+<img src="butterfly-logo.png">
 
 <div>
 <h1>Laya's Babysitting</h1>
@@ -151,16 +173,16 @@ Loving Care for Your Little Ones
 
 <div class="nav">
 
-<a href="#">Home</a>
-<a href="#">Services</a>
-<a href="#">Areas</a>
+<a href="#home">Home</a>
+<a href="#services">Services</a>
+<a href="#areas">Areas</a>
 <a href="#book">Book Now</a>
-<a href="#">Reviews</a>
-<a href="#">Contact</a>
+<a href="#reviews">Reviews</a>
+<a href="#contact">Contact</a>
 
 </div>
 
-<div class="hero">
+<div class="hero" id="home">
 
 <h2>Trusted babysitting for busy families.</h2>
 
@@ -173,6 +195,90 @@ Safe, dependable childcare with easy booking and loving care for your little one
 <a class="btn call" href="tel:15122309391">Call</a>
 
 <a class="btn text" href="sms:15122309391">Text</a>
+
+</div>
+
+<div class="services" id="services">
+
+<div class="card">
+<h3>Date Night Babysitting</h3>
+<p>Perfect for parents wanting a night out.</p>
+</div>
+
+<div class="card">
+<h3>Weekend Babysitting</h3>
+<p>Flexible weekend childcare.</p>
+</div>
+
+<div class="card">
+<h3>Recurring Weekly Babysitting</h3>
+<p>Reliable weekly childcare schedules.</p>
+</div>
+
+</div>
+
+<div class="services" id="areas">
+
+<div class="card">
+<h3>Areas Served</h3>
+<p>
+Austin<br>
+Pflugerville<br>
+Round Rock<br>
+Georgetown<br>
+Manor<br>
+Del Valle<br>
+Kyle<br>
+Buda<br>
+San Marcos
+</p>
+</div>
+
+</div>
+
+<div class="services" id="reviews">
+
+<div class="card">
+<h3>Parent Reviews</h3>
+<p>⭐️⭐️⭐️⭐️⭐️ “Amazing babysitter and very reliable.”</p>
+<p>⭐️⭐️⭐️⭐️⭐️ “My kids loved her!”</p>
+</div>
+
+</div>
+
+<div class="services" id="book">
+
+<div class="card">
+
+<h3>Book Babysitting</h3>
+
+<form action="https://formsubmit.co/Layacrayton22@gmail.com" method="POST">
+
+<input type="hidden" name="_captcha" value="false">
+
+<input type="text" name="Name" placeholder="Parent name" required>
+
+<input type="text" name="Phone" placeholder="Phone number">
+
+<input type="date" name="Date">
+
+<textarea name="Notes" placeholder="Child ages, hours, location"></textarea>
+
+<button style="padding:15px;background:red;color:white;border:none;border-radius:15px;">
+Send Booking Request
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<div class="footer" id="contact">
+
+<p>Email: Layacrayton22@gmail.com</p>
+<p>Phone: 512-230-9391</p>
+<p>Rate: $20-$26 per hour</p>
 
 </div>
 
