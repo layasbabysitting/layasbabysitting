@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laya's Babysitting</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+color:white;
+background:linear-gradient(135deg,#3b0b4f,#7a004b,#ff3c00);
+}
+
+/* top bar */
+
+.topbar{
+background:#2a0837;
+text-align:center;
+padding:10px;
+font-size:14px;
+}
+
+.topbar a{
+color:gold;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* header */
+
+.header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:20px;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logo img{
+width:60px;
+}
+
+.logo h1{
+margin:0;
+font-size:24px;
+color:gold;
+}
+
+.menu{
+font-size:30px;
+cursor:pointer;
+}
+
+/* hero */
+
+.hero{
+padding:40px 20px;
+}
+
+.hero h2{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:18px;
+line-height:1.5;
+}
+
+/* buttons */
+
+.btn{
+display:block;
+margin:10px 0;
+padding:16px;
+border-radius:40px;
+text-align:center;
+font-size:18px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.book{
+background:white;
+color:#7a00cc;
+}
+
+.call{
+border:2px solid white;
+color:white;
+}
+
+.text{
+border:2px solid white;
+color:white;
+}
+
+/* cards */
+
+.section{
+padding:20px;
+}
+
+.card{
+background:white;
+color:black;
+border-radius:20px;
+padding:20px;
+margin-bottom:20px;
+}
+
+/* form */
+
+input, textarea{
+width:100%;
+padding:12px;
+margin:6px 0;
+border-radius:10px;
+border:none;
+}
+
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:20px;
+background:#ff2f00;
+color:white;
+font-size:18px;
+}
+
+/* footer */
+
+.footer{
+text-align:center;
+padding:20px;
+font-size:16px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+Babysitting available in Austin, Pflugerville, Round Rock, Georgetown, Manor, Del Valle, Kyle, Buda, and San Marcos •
+<a href="tel:15122309391">Call/Text 512-230-9391</a>
+</div>
+
+<div class="header">
+
+<div class="logo">
+<img src="butterfly-logo.png">
+<h1>Laya's Babysitting</h1>
+</div>
+
+<div class="menu">☰</div>
+
+</div>
+
+<div class="hero">
+
+<h2>Trusted babysitting for busy families.</h2>
+
+<p>
+Safe, dependable childcare with easy booking, clear communication,
+and loving care for your little ones.
+</p>
+
+<a class="btn book" href="#book">Book Babysitting</a>
+<a class="btn call" href="tel:15122309391">Call</a>
+<a class="btn text" href="sms:15122309391">Text</a>
+
+</div>
+
+<div class="section">
+
+<div class="card">
+<h3>Date Night Babysitting</h3>
+<p>Reliable childcare while parents enjoy a night out.</p>
+</div>
+
+<div class="card">
+<h3>Weekend Babysitting</h3>
+<p>Flexible weekend babysitting for busy families.</p>
+</div>
+
+<div class="card">
+<h3>Recurring Babysitting</h3>
+<p>Ongoing babysitting depending on schedule availability.</p>
+</div>
+
+</div>
+
+<div class="section" id="book">
+
+<div class="card">
+
+<h2>Book Babysitting</h2>
+
+<form action="mailto:layacrayton22@gmail.com" method="post" enctype="text/plain">
+
+<input type="text" name="Name" placeholder="Parent name" required>
+
+<input type="text" name="Phone" placeholder="Phone number">
+
+<input type="date" name="Date">
+
+<textarea name="Notes" placeholder="Child ages, hours, location"></textarea>
+
+<button type="submit">Send Booking Request</button>
+
+</form>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+<p>Gmail: layacrayton22@gmail.com</p>
+<p>Rate: $20–$26 per hour</p>
+
+</div>
+
+</body>
+</html>
