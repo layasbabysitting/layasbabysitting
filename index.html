@@ -8,31 +8,26 @@
 <style>
 
 /* COLORS */
+
 :root{
-  --bg:#fffafd;
-  --card:#ffffff;
-  --text:#351a3a;
-  --muted:#7a5b7e;
-
-  --purple:#8b4bd4;
-  --pink:#f6b6d4;
-  --gold:#e0b75a;
-  --white:#ffffff;
-
-  --purple-dark:#6c34a9;
-  --border:rgba(139,75,212,0.14);
-  --shadow:0 10px 30px rgba(139,75,212,0.15);
+--purple:#8b4bd4;
+--pink:#f6b6d4;
+--gold:#e0b75a;
+--white:#ffffff;
+--text:#2c1230;
 }
 
+/* RESET */
+
 *{
-box-sizing:border-box;
 margin:0;
 padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,Arial,sans-serif;
 }
 
 body{
-font-family:Segoe UI,Arial,sans-serif;
-background:var(--bg);
+background:#fffafd;
 color:var(--text);
 }
 
@@ -55,19 +50,19 @@ gap:12px;
 width:52px;
 height:52px;
 border-radius:16px;
+border:2px solid white;
 box-shadow:
 0 0 18px rgba(224,183,90,0.45),
 0 6px 18px rgba(139,75,212,0.25);
-border:2px solid white;
 }
 
-.brand-text h1{
+.brand h1{
 font-size:18px;
 }
 
-.brand-text p{
+.brand p{
 font-size:12px;
-color:var(--muted);
+color:#7a5b7e;
 }
 
 /* MENU */
@@ -90,9 +85,9 @@ margin-bottom:10px;
 }
 
 .hero p{
-color:var(--muted);
 max-width:600px;
 margin:auto;
+color:#7a5b7e;
 }
 
 /* BUTTONS */
@@ -104,6 +99,7 @@ font-weight:bold;
 cursor:pointer;
 display:inline-block;
 margin:10px;
+text-decoration:none;
 transition:.2s;
 }
 
@@ -134,22 +130,28 @@ padding:40px 20px;
 }
 
 .card{
-background:var(--card);
+background:white;
 padding:20px;
 border-radius:20px;
-box-shadow:var(--shadow);
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
 .card h3{
 margin-bottom:10px;
 }
 
+/* SECTION */
+
+.section{
+padding:40px 20px;
+}
+
 /* FOOTER */
 
 footer{
 text-align:center;
-padding:20px;
-color:var(--muted);
+padding:30px;
+color:#7a5b7e;
 }
 
 </style>
@@ -160,12 +162,14 @@ color:var(--muted);
 <header>
 
 <div class="brand">
+
 <img src="7DED5B2A-F553-4C29-9476-B91C3C689616.png" class="logo-img">
 
-<div class="brand-text">
+<div>
 <h1>Laya’s Babysitting</h1>
 <p>Austin Area Babysitting</p>
 </div>
+
 </div>
 
 <div class="menu">☰</div>
@@ -189,7 +193,7 @@ Flexible babysitting for date nights, weekends, and recurring weekly care.
 
 <div class="card">
 <h3>Date Night Babysitting</h3>
-<p>Perfect for dinners, events, or evenings out.</p>
+<p>Perfect for dinners, events, and evenings out.</p>
 <a class="btn btn-primary">Book</a>
 </div>
 
@@ -200,37 +204,43 @@ Flexible babysitting for date nights, weekends, and recurring weekly care.
 </div>
 
 <div class="card">
-<h3>Recurring Weekly</h3>
+<h3>Recurring Weekly Babysitting</h3>
 <p>Consistent weekly babysitting for busy families.</p>
 <a class="btn btn-primary">Book</a>
 </div>
 
 </section>
 
-<section style="padding:40px 20px">
+<section class="section">
 
-<h2 style="margin-bottom:10px">Areas Served</h2>
+<h2>Areas Served</h2>
 
-<p style="color:var(--muted);margin-bottom:20px">
-Austin, Pflugerville, Round Rock, Georgetown, Manor, Del Valle, Buda, Kyle, San Marcos
+<p>
+Austin • Pflugerville • Round Rock • Georgetown • Manor • Del Valle • Buda • Kyle • San Marcos
 </p>
 
 </section>
 
-<section style="padding:40px 20px">
+<section class="section">
 
-<h2 style="margin-bottom:10px">Payments Accepted</h2>
+<h2>Payments Accepted</h2>
 
-<p style="color:var(--muted)">
-Zelle • Apple Pay • Cash
-</p>
+<p>Zelle • Apple Pay • Cash</p>
+
+</section>
+
+<section class="section">
+
+<h2>Contact</h2>
+
+<p>Phone: 512-230-9391</p>
+<p>Email: layacrayton22@gmail.com</p>
 
 </section>
 
 <footer>
 
-<p>Contact: 512-230-9391</p>
-<p>Email: layacrayton22@gmail.com</p>
+<p>© Laya’s Babysitting</p>
 
 </footer>
 
