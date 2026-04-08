@@ -1,1139 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Laya’s Babysitting</title>
-  <style>
-    :root{
-      --bg: #fff9fc;
-      --card: rgba(255,255,255,0.96);
-      --text: #341b34;
-      --muted: #7a6173;
-
-      --red: #c93f5d;
-      --pink: #f4bfd1;
-      --purple: #7f4bb3;
-      --gold: #d9ab4d;
-      --white: #ffffff;
-
-      --purple-dark: #64338f;
-      --border: rgba(127, 75, 179, 0.12);
-      --shadow: 0 10px 32px rgba(94, 38, 124, 0.11);
-      --radius: 22px;
-    }
-
-    *{
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html{
-      scroll-behavior: smooth;
-    }
-
-    body{
-      font-family: "Inter", "Segoe UI", Arial, sans-serif;
-      color: var(--text);
-      line-height: 1.5;
-      background:
-        radial-gradient(circle at top left, rgba(244,191,209,0.55), transparent 28%),
-        radial-gradient(circle at top right, rgba(217,171,77,0.23), transparent 24%),
-        linear-gradient(180deg, #fff8fb 0%, #ffffff 100%);
-    }
-
-    a{
-      text-decoration: none;
-      color: inherit;
-    }
-
-    button{
-      font: inherit;
-      cursor: pointer;
-      border: none;
-      background: none;
-    }
-
-    .site-shell{
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 16px 16px 42px;
-    }
-
-    .topbar{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 8px 0 18px;
-    }
-
-    .brand{
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo{
-      width: 46px;
-      height: 46px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, var(--purple), var(--red), var(--gold), var(--pink));
-      color: white;
-      box-shadow: var(--shadow);
-      font-size: 20px;
-    }
-
-    .brand-text h1{
-      font-size: 1.12rem;
-      line-height: 1.1;
-      letter-spacing: 0.2px;
-    }
-
-    .brand-text p{
-      color: var(--muted);
-      font-size: 0.82rem;
-      margin-top: 2px;
-    }
-
-    .menu-btn{
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.96);
-      box-shadow: var(--shadow);
-      position: relative;
-    }
-
-    .menu-btn span,
-    .menu-btn::before,
-    .menu-btn::after{
-      content: "";
-      position: absolute;
-      left: 50%;
-      width: 18px;
-      height: 2px;
-      margin-left: -9px;
-      background: var(--purple-dark);
-      border-radius: 10px;
-    }
-
-    .menu-btn span{ top: 22px; }
-    .menu-btn::before{ top: 16px; }
-    .menu-btn::after{ top: 28px; }
-
-    .drawer{
-      position: fixed;
-      top: 0;
-      right: -350px;
-      width: min(86vw, 330px);
-      height: 100vh;
-      z-index: 999;
-      background: rgba(255,255,255,0.98);
-      backdrop-filter: blur(10px);
-      box-shadow: -10px 0 30px rgba(0,0,0,0.12);
-      padding: 22px 18px;
-      overflow-y: auto;
-      transition: right 0.28s ease;
-    }
-
-    .drawer.open{
-      right: 0;
-    }
-
-    .overlay{
-      position: fixed;
-      inset: 0;
-      background: rgba(45, 22, 52, 0.28);
-      z-index: 998;
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.25s ease;
-    }
-
-    .overlay.show{
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .drawer-top{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-
-    .drawer-title{
-      font-size: 1.04rem;
-      font-weight: 700;
-    }
-
-    .close-btn{
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: #f8f2fb;
-      color: var(--purple-dark);
-      font-size: 1.05rem;
-    }
-
-    .drawer-links{
-      display: grid;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .drawer-links a{
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: #fff;
-      border: 1px solid var(--border);
-      font-size: 0.93rem;
-    }
-
-    .drawer-card{
-      margin-top: 14px;
-      padding: 14px;
-      border-radius: 18px;
-      border: 1px solid var(--border);
-      background:
-        linear-gradient(180deg, rgba(244,191,209,0.16), rgba(217,171,77,0.10));
-    }
-
-    .drawer-card h3{
-      font-size: 0.96rem;
-      margin-bottom: 7px;
-    }
-
-    .drawer-card p,
-    .drawer-card li{
-      font-size: 0.89rem;
-      color: var(--muted);
-    }
-
-    .drawer-card ul{
-      padding-left: 18px;
-      margin-top: 6px;
-    }
-
-    .hero{
-      display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 18px;
-      align-items: stretch;
-      margin-top: 4px;
-    }
-
-    .hero-left,
-    .hero-right{
-      border-radius: 28px;
-      overflow: hidden;
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.72);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-left{
-      padding: 30px 24px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.93)),
-        linear-gradient(135deg, rgba(127,75,179,0.18), rgba(201,63,93,0.14), rgba(244,191,209,0.18), rgba(217,171,77,0.16));
-    }
-
-    .hero-right{
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background:
-        linear-gradient(155deg, rgba(127,75,179,0.08), rgba(201,63,93,0.07), rgba(244,191,209,0.15)),
-        #fff;
-    }
-
-    .eyebrow{
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(127,75,179,0.14);
-      color: var(--purple-dark);
-      padding: 7px 12px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
-
-    .hero h2{
-      font-size: clamp(1.95rem, 4vw, 3.25rem);
-      line-height: 1.03;
-      letter-spacing: -1.1px;
-      margin-bottom: 10px;
-    }
-
-    .hero p{
-      font-size: 0.93rem;
-      color: var(--muted);
-      max-width: 600px;
-    }
-
-    .hero-actions{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .btn{
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 11px 15px;
-      border-radius: 14px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      transition: 0.2s ease;
-    }
-
-    .btn-primary{
-      color: white;
-      background: linear-gradient(135deg, var(--purple), var(--red));
-      box-shadow: 0 10px 24px rgba(127,75,179,0.18);
-    }
-
-    .btn-secondary{
-      color: var(--purple-dark);
-      background: #fff;
-      border: 1px solid var(--border);
-    }
-
-    .btn-gold{
-      color: #563600;
-      background: linear-gradient(135deg, #fff4d7, var(--gold));
-      border: 1px solid rgba(217,171,77,0.22);
-    }
-
-    .highlight-box{
-      width: 100%;
-      padding: 18px;
-      border-radius: 22px;
-      background: rgba(255,255,255,0.84);
-      border: 1px solid var(--border);
-    }
-
-    .highlight-box h3{
-      font-size: 1.02rem;
-      margin-bottom: 6px;
-    }
-
-    .highlight-box p{
-      font-size: 0.89rem;
-      color: var(--muted);
-    }
-
-    .mini-grid{
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    .mini-item{
-      padding: 13px;
-      border-radius: 18px;
-      background: #fff;
-      border: 1px solid var(--border);
-    }
-
-    .mini-item strong{
-      display: block;
-      font-size: 0.9rem;
-      margin-bottom: 4px;
-    }
-
-    .mini-item span{
-      font-size: 0.83rem;
-      color: var(--muted);
-    }
-
-    section{
-      margin-top: 24px;
-    }
-
-    .section-head{
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 13px;
-    }
-
-    .section-head h3{
-      font-size: 1.28rem;
-      letter-spacing: -0.4px;
-    }
-
-    .section-head p{
-      color: var(--muted);
-      font-size: 0.89rem;
-      max-width: 540px;
-    }
-
-    .cards{
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-    }
-
-    .card{
-      background: rgba(255,255,255,0.96);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      border-radius: 22px;
-      padding: 17px;
-      transition: 0.2s ease;
-    }
-
-    .card:hover{
-      transform: translateY(-3px);
-    }
-
-    .card-badge{
-      display: inline-block;
-      font-size: 0.76rem;
-      font-weight: 700;
-      color: var(--purple-dark);
-      background: #f7effc;
-      padding: 6px 10px;
-      border-radius: 999px;
-      margin-bottom: 10px;
-    }
-
-    .card h4{
-      font-size: 1.02rem;
-      margin-bottom: 7px;
-    }
-
-    .card p{
-      color: var(--muted);
-      font-size: 0.89rem;
-      margin-bottom: 12px;
-    }
-
-    .card ul{
-      padding-left: 18px;
-      color: var(--muted);
-      font-size: 0.87rem;
-      margin-bottom: 14px;
-    }
-
-    .card ul li{
-      margin-bottom: 6px;
-    }
-
-    .card .btn{
-      width: 100%;
-    }
-
-    .booking-wrap,
-    .locations-wrap,
-    .payments-wrap,
-    .reviews-wrap{
-      display: none;
-    }
-
-    .booking-wrap.active,
-    .locations-wrap.active,
-    .payments-wrap.active,
-    .reviews-wrap.active{
-      display: block;
-      animation: fadeUp 0.25s ease;
-    }
-
-    .booking-panel,
-    .locations-panel,
-    .payments-panel,
-    .reviews-panel{
-      background: rgba(255,255,255,0.97);
-      border-radius: 24px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      padding: 20px;
-    }
-
-    .booking-title,
-    .panel-title{
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .booking-title h3,
-    .panel-title h3{
-      font-size: 1.16rem;
-    }
-
-    .booking-title p,
-    .panel-title p{
-      font-size: 0.89rem;
-      color: var(--muted);
-    }
-
-    form{
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .full{
-      grid-column: 1 / -1;
-    }
-
-    label{
-      display: block;
-      font-size: 0.83rem;
-      font-weight: 700;
-      color: var(--purple-dark);
-      margin-bottom: 6px;
-    }
-
-    input, select, textarea{
-      width: 100%;
-      padding: 12px 13px;
-      border-radius: 14px;
-      border: 1px solid rgba(127,75,179,0.16);
-      background: #fff;
-      outline: none;
-      font: inherit;
-      color: var(--text);
-      font-size: 0.92rem;
-    }
-
-    textarea{
-      min-height: 112px;
-      resize: vertical;
-    }
-
-    input:focus, select:focus, textarea:focus{
-      border-color: var(--purple);
-      box-shadow: 0 0 0 4px rgba(127,75,179,0.08);
-    }
-
-    .form-note{
-      margin-top: 12px;
-      font-size: 0.83rem;
-      color: var(--muted);
-    }
-
-    .result-box{
-      display: none;
-      margin-top: 14px;
-      padding: 14px;
-      border-radius: 18px;
-      background: linear-gradient(180deg, #fff8ea, #fff);
-      border: 1px solid rgba(217,171,77,0.3);
-    }
-
-    .result-box.active{
-      display: block;
-    }
-
-    .result-box p{
-      font-size: 0.89rem;
-      margin-bottom: 10px;
-    }
-
-    .result-actions{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .location-tags{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .tag{
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, #fff, #fff7fb);
-      border: 1px solid var(--border);
-      font-size: 0.87rem;
-      color: var(--purple-dark);
-      font-weight: 700;
-    }
-
-    .payments,
-    .reviews{
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 13px;
-    }
-
-    .pill-card{
-      background: rgba(255,255,255,0.96);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      border-radius: 20px;
-      padding: 16px;
-    }
-
-    .pill-card h4{
-      font-size: 0.96rem;
-      margin-bottom: 6px;
-    }
-
-    .pill-card p{
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    footer{
-      margin-top: 26px;
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--muted);
-      padding: 10px 0 4px;
-    }
-
-    @keyframes fadeUp{
-      from{opacity:0; transform:translateY(6px);}
-      to{opacity:1; transform:translateY(0);}
-    }
-
-    @media (max-width: 930px){
-      .hero{
-        grid-template-columns: 1fr;
-      }
-      .cards,
-      .payments,
-      .reviews{
-        grid-template-columns: 1fr;
-      }
-      form{
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 640px){
-      .site-shell{
-        padding: 14px 14px 38px;
-      }
-      .hero-left{
-        padding: 24px 18px;
-      }
-      .hero-right{
-        padding: 16px;
-      }
-      .hero h2{
-        font-size: 2rem;
-      }
-      .mini-grid{
-        grid-template-columns: 1fr;
-      }
-      .section-head{
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laya’s Babysitting</title>
+
+<style>
+
+/* COLORS */
+:root{
+  --bg:#fffafd;
+  --card:#ffffff;
+  --text:#351a3a;
+  --muted:#7a5b7e;
+
+  --purple:#8b4bd4;
+  --pink:#f6b6d4;
+  --gold:#e0b75a;
+  --white:#ffffff;
+
+  --purple-dark:#6c34a9;
+  --border:rgba(139,75,212,0.14);
+  --shadow:0 10px 30px rgba(139,75,212,0.15);
+}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Segoe UI,Arial,sans-serif;
+background:var(--bg);
+color:var(--text);
+}
+
+/* HEADER */
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo-img{
+width:52px;
+height:52px;
+border-radius:16px;
+box-shadow:
+0 0 18px rgba(224,183,90,0.45),
+0 6px 18px rgba(139,75,212,0.25);
+border:2px solid white;
+}
+
+.brand-text h1{
+font-size:18px;
+}
+
+.brand-text p{
+font-size:12px;
+color:var(--muted);
+}
+
+/* MENU */
+
+.menu{
+font-size:26px;
+cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+padding:40px 20px;
+text-align:center;
+}
+
+.hero h2{
+font-size:34px;
+margin-bottom:10px;
+}
+
+.hero p{
+color:var(--muted);
+max-width:600px;
+margin:auto;
+}
+
+/* BUTTONS */
+
+.btn{
+padding:12px 18px;
+border-radius:12px;
+font-weight:bold;
+cursor:pointer;
+display:inline-block;
+margin:10px;
+transition:.2s;
+}
+
+.btn-primary{
+color:white;
+background:linear-gradient(135deg,#8b4bd4,#f6b6d4);
+box-shadow:0 6px 18px rgba(139,75,212,0.35);
+}
+
+.btn-gold{
+color:#5c4200;
+background:linear-gradient(135deg,#fff3d4,#e0b75a);
+box-shadow:0 6px 18px rgba(224,183,90,0.35);
+}
+
+.btn:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 24px rgba(139,75,212,0.4);
+}
+
+/* SERVICES */
+
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:40px 20px;
+}
+
+.card{
+background:var(--card);
+padding:20px;
+border-radius:20px;
+box-shadow:var(--shadow);
+}
+
+.card h3{
+margin-bottom:10px;
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:20px;
+color:var(--muted);
+}
+
+</style>
 </head>
+
 <body>
-  <div class="overlay" id="overlay" onclick="closeDrawer()"></div>
-
-  <aside class="drawer" id="drawer">
-    <div class="drawer-top">
-      <div class="drawer-title">Menu</div>
-      <button class="close-btn" onclick="closeDrawer()">✕</button>
-    </div>
-
-    <div class="drawer-links">
-      <a href="#home" onclick="closeDrawer()">Home</a>
-      <a href="#services" onclick="closeDrawer()">Services</a>
-      <a href="#locations-page" onclick="openLocationsFromMenu()">Locations</a>
-      <a href="#payments-page" onclick="openPaymentsFromMenu()">Payments</a>
-      <a href="#reviews-page" onclick="openReviewsFromMenu()">Reviews</a>
-      <a href="tel:5122309391" onclick="closeDrawer()">Call: 512-230-9391</a>
-      <a href="sms:5122309391" onclick="closeDrawer()">Text Me</a>
-      <a href="mailto:layacrayton22@gmail.com" onclick="closeDrawer()">Email Me</a>
-    </div>
-
-    <div class="drawer-card">
-      <h3>Contact</h3>
-      <p>Phone: 512-230-9391</p>
-      <p>Email: layacrayton22@gmail.com</p>
-    </div>
-
-    <div class="drawer-card">
-      <h3>Areas Served</h3>
-      <ul>
-        <li>Austin</li>
-        <li>Pflugerville</li>
-        <li>Round Rock</li>
-        <li>Georgetown</li>
-        <li>Manor</li>
-        <li>Del Valle</li>
-        <li>Buda</li>
-        <li>Kyle</li>
-        <li>San Marcos</li>
-      </ul>
-    </div>
-
-    <div class="drawer-card">
-      <h3>Payments</h3>
-      <p>Zelle, Apple Pay, and Cash accepted.</p>
-    </div>
-  </aside>
-
-  <div class="site-shell">
-    <header class="topbar">
-      <a class="brand" href="#home">
-        <div class="logo">🦋</div>
-        <div class="brand-text">
-          <h1>Laya’s Babysitting</h1>
-          <p>Reliable babysitting in the Austin area</p>
-        </div>
-      </a>
-
-      <button class="menu-btn" aria-label="Open menu" onclick="openDrawer()">
-        <span></span>
-      </button>
-    </header>
-
-    <main>
-      <section class="hero" id="home">
-        <div class="hero-left">
-          <div class="eyebrow">Trusted care • Easy booking • Austin area</div>
-          <h2>Reliable babysitting for busy families.</h2>
-          <p>
-            Laya’s Babysitting offers flexible care for date nights, weekends, and recurring weekly babysitting.
-            Tap a service to open the right booking form.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#services" class="btn btn-primary">View Services</a>
-            <a href="tel:5122309391" class="btn btn-secondary">Call</a>
-            <a href="sms:5122309391" class="btn btn-gold">Text</a>
-          </div>
-        </div>
-
-        <div class="hero-right">
-          <div class="highlight-box">
-            <h3>Why families choose Laya’s Babysitting</h3>
-            <p>
-              Easy contact, simple booking, beautiful design, and flexible babysitting made for real family schedules.
-            </p>
-
-            <div class="mini-grid">
-              <div class="mini-item">
-                <strong>Flexible Services</strong>
-                <span>Date night, weekend, and recurring weekly babysitting.</span>
-              </div>
-              <div class="mini-item">
-                <strong>Easy Payments</strong>
-                <span>Zelle, Apple Pay, and cash accepted.</span>
-              </div>
-              <div class="mini-item">
-                <strong>Fast Contact</strong>
-                <span>Call, text, or email anytime to ask about availability.</span>
-              </div>
-              <div class="mini-item">
-                <strong>Calendar Ready</strong>
-                <span>Bookings can be added to Google Calendar after form submission.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="services">
-        <div class="section-head">
-          <div>
-            <h3>Services</h3>
-            <p>Choose one service to open that booking form.</p>
-          </div>
-        </div>
-
-        <div class="cards">
-          <article class="card">
-            <div class="card-badge">Evening Care</div>
-            <h4>Date Night Babysitting</h4>
-            <p>Perfect for dinner dates, events, and a few hours out.</p>
-            <ul>
-              <li>One-time booking</li>
-              <li>Easy evening care</li>
-              <li>Quick to schedule</li>
-            </ul>
-            <button class="btn btn-primary" onclick="showBooking('date-night')">Book Date Night</button>
-          </article>
-
-          <article class="card">
-            <div class="card-badge">Flexible Care</div>
-            <h4>Weekend Babysitting</h4>
-            <p>Helpful for Saturdays, Sundays, errands, events, and extra support.</p>
-            <ul>
-              <li>Day or evening help</li>
-              <li>Good for busy weekends</li>
-              <li>Easy booking</li>
-            </ul>
-            <button class="btn btn-primary" onclick="showBooking('weekend')">Book Weekend</button>
-          </article>
-
-          <article class="card">
-            <div class="card-badge">Ongoing Support</div>
-            <h4>Recurring Weekly Babysitting</h4>
-            <p>Steady weekly care for families needing regular babysitting.</p>
-            <ul>
-              <li>Consistent weekly routine</li>
-              <li>Great for work schedules</li>
-              <li>Built for repeat care</li>
-            </ul>
-            <button class="btn btn-primary" onclick="showBooking('weekly')">Book Weekly</button>
-          </article>
-        </div>
-      </section>
-
-      <section class="booking-wrap" id="booking-section">
-        <div class="booking-panel">
-          <div class="booking-title">
-            <div>
-              <h3 id="bookingHeading">Book Babysitting</h3>
-              <p id="bookingSub">Fill this out and send it to email or add it to your calendar.</p>
-            </div>
-            <button class="btn btn-secondary" onclick="hideBooking()">Close</button>
-          </div>
-
-          <form id="bookingForm">
-            <div>
-              <label for="parentName">Parent Name</label>
-              <input type="text" id="parentName" required />
-            </div>
-
-            <div>
-              <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" required />
-            </div>
-
-            <div>
-              <label for="email">Email</label>
-              <input type="email" id="email" required />
-            </div>
-
-            <div>
-              <label for="serviceType">Service</label>
-              <select id="serviceType" required>
-                <option value="">Choose one</option>
-                <option value="Date Night Babysitting">Date Night Babysitting</option>
-                <option value="Weekend Babysitting">Weekend Babysitting</option>
-                <option value="Recurring Weekly Babysitting">Recurring Weekly Babysitting</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="date">Date</label>
-              <input type="date" id="date" required />
-            </div>
-
-            <div>
-              <label for="startTime">Start Time</label>
-              <input type="time" id="startTime" required />
-            </div>
-
-            <div>
-              <label for="endTime">End Time</label>
-              <input type="time" id="endTime" required />
-            </div>
-
-            <div>
-              <label for="children">Number of Children</label>
-              <input type="number" id="children" min="1" placeholder="1" required />
-            </div>
-
-            <div class="full">
-              <label for="address">Location / Address</label>
-              <input type="text" id="address" placeholder="Austin, Pflugerville, Round Rock, Georgetown, Manor, Del Valle, Buda, Kyle, San Marcos..." required />
-            </div>
-
-            <div class="full">
-              <label for="notes">Extra Details</label>
-              <textarea id="notes" placeholder="Anything important I should know? Ages, routines, allergies, special notes, etc."></textarea>
-            </div>
-
-            <div class="full">
-              <button type="submit" class="btn btn-primary">Create Booking</button>
-            </div>
-          </form>
-
-          <p class="form-note">Accepted payments: Zelle, Apple Pay, Cash.</p>
-
-          <div class="result-box" id="resultBox">
-            <p>Your booking draft is ready. Use the buttons below to email the booking and add it to Google Calendar.</p>
-            <div class="result-actions">
-              <a id="emailLink" class="btn btn-primary" target="_blank">Send Booking Email</a>
-              <a id="calendarLink" class="btn btn-gold" target="_blank">Add to Google Calendar</a>
-              <a href="sms:5122309391" class="btn btn-secondary">Text Instead</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="locations-wrap" id="locations-page">
-        <div class="locations-panel">
-          <div class="panel-title">
-            <div>
-              <h3>Areas Served</h3>
-              <p>Babysitting available in these areas.</p>
-            </div>
-            <button class="btn btn-secondary" onclick="hideLocations()">Close</button>
-          </div>
-
-          <div class="location-tags">
-            <span class="tag">Austin</span>
-            <span class="tag">Pflugerville</span>
-            <span class="tag">Round Rock</span>
-            <span class="tag">Georgetown</span>
-            <span class="tag">Manor</span>
-            <span class="tag">Del Valle</span>
-            <span class="tag">Buda</span>
-            <span class="tag">Kyle</span>
-            <span class="tag">San Marcos</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="payments-wrap" id="payments-page">
-        <div class="payments-panel">
-          <div class="panel-title">
-            <div>
-              <h3>Payment Options</h3>
-              <p>Simple and easy ways to pay.</p>
-            </div>
-            <button class="btn btn-secondary" onclick="hidePayments()">Close</button>
-          </div>
-
-          <div class="payments">
-            <div class="pill-card">
-              <h4>Zelle</h4>
-              <p>Fast bank-to-bank payment option.</p>
-            </div>
-            <div class="pill-card">
-              <h4>Apple Pay</h4>
-              <p>Quick and easy mobile payment.</p>
-            </div>
-            <div class="pill-card">
-              <h4>Cash</h4>
-              <p>Cash payments are also accepted.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="reviews-wrap" id="reviews-page">
-        <div class="reviews-panel">
-          <div class="panel-title">
-            <div>
-              <h3>Parent Reviews</h3>
-              <p>You can replace these with your real reviews later.</p>
-            </div>
-            <button class="btn btn-secondary" onclick="hideReviews()">Close</button>
-          </div>
-
-          <div class="reviews">
-            <div class="pill-card">
-              <h4>Warm and dependable</h4>
-              <p>“Very kind, dependable, and easy to communicate with. Our kids felt comfortable right away.”</p>
-            </div>
-            <div class="pill-card">
-              <h4>Easy to book</h4>
-              <p>“Booking was simple, and everything felt organized and professional.”</p>
-            </div>
-            <div class="pill-card">
-              <h4>Would book again</h4>
-              <p>“Super helpful for our weekend plans. We would absolutely book again.”</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      © <span id="year"></span> Laya’s Babysitting • 512-230-9391
-    </footer>
-  </div>
-
-  <script>
-    const drawer = document.getElementById("drawer");
-    const overlay = document.getElementById("overlay");
-
-    const bookingSection = document.getElementById("booking-section");
-    const locationsSection = document.getElementById("locations-page");
-    const paymentsSection = document.getElementById("payments-page");
-    const reviewsSection = document.getElementById("reviews-page");
-
-    const bookingHeading = document.getElementById("bookingHeading");
-    const bookingSub = document.getElementById("bookingSub");
-    const serviceType = document.getElementById("serviceType");
-    const resultBox = document.getElementById("resultBox");
-    const emailLink = document.getElementById("emailLink");
-    const calendarLink = document.getElementById("calendarLink");
-
-    function openDrawer(){
-      drawer.classList.add("open");
-      overlay.classList.add("show");
-    }
-
-    function closeDrawer(){
-      drawer.classList.remove("open");
-      overlay.classList.remove("show");
-    }
-
-    function hideAllPanels(){
-      bookingSection.classList.remove("active");
-      locationsSection.classList.remove("active");
-      paymentsSection.classList.remove("active");
-      reviewsSection.classList.remove("active");
-    }
-
-    function showBooking(type){
-      hideAllPanels();
-      bookingSection.classList.add("active");
-      bookingSection.scrollIntoView({ behavior: "smooth", block: "start" });
-
-      if(type === "date-night"){
-        bookingHeading.textContent = "Date Night Booking";
-        bookingSub.textContent = "Use this form for one-time evening babysitting.";
-        serviceType.value = "Date Night Babysitting";
-      } else if(type === "weekend"){
-        bookingHeading.textContent = "Weekend Booking";
-        bookingSub.textContent = "Use this form for Saturday or Sunday babysitting.";
-        serviceType.value = "Weekend Babysitting";
-      } else {
-        bookingHeading.textContent = "Recurring Weekly Booking";
-        bookingSub.textContent = "Use this form for weekly ongoing babysitting.";
-        serviceType.value = "Recurring Weekly Babysitting";
-      }
-    }
-
-    function hideBooking(){
-      bookingSection.classList.remove("active");
-    }
-
-    function openLocationsFromMenu(){
-      closeDrawer();
-      hideAllPanels();
-      locationsSection.classList.add("active");
-      locationsSection.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    function hideLocations(){
-      locationsSection.classList.remove("active");
-    }
-
-    function openPaymentsFromMenu(){
-      closeDrawer();
-      hideAllPanels();
-      paymentsSection.classList.add("active");
-      paymentsSection.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    function hidePayments(){
-      paymentsSection.classList.remove("active");
-    }
-
-    function openReviewsFromMenu(){
-      closeDrawer();
-      hideAllPanels();
-      reviewsSection.classList.add("active");
-      reviewsSection.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    function hideReviews(){
-      reviewsSection.classList.remove("active");
-    }
-
-    function toGoogleDate(dateStr, timeStr){
-      const partsDate = dateStr.split("-");
-      const partsTime = timeStr.split(":");
-      return `${partsDate[0]}${partsDate[1]}${partsDate[2]}T${partsTime[0]}${partsTime[1]}00`;
-    }
-
-    document.getElementById("bookingForm").addEventListener("submit", function(e){
-      e.preventDefault();
-
-      const parentName = document.getElementById("parentName").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const service = document.getElementById("serviceType").value.trim();
-      const date = document.getElementById("date").value;
-      const startTime = document.getElementById("startTime").value;
-      const endTime = document.getElementById("endTime").value;
-      const children = document.getElementById("children").value.trim();
-      const address = document.getElementById("address").value.trim();
-      const notes = document.getElementById("notes").value.trim();
-
-      const subject = encodeURIComponent(`Babysitting Booking Request - ${service}`);
-      const body = encodeURIComponent(
-`Hello,
-
-I would like to book babysitting.
-
-Parent Name: ${parentName}
-Phone Number: ${phone}
-Email: ${email}
-Service: ${service}
-Date: ${date}
-Start Time: ${startTime}
-End Time: ${endTime}
-Number of Children: ${children}
-Location: ${address}
-
-Extra Details:
-${notes || "N/A"}
-
-Payment options available: Zelle, Apple Pay, Cash
-
-Thank you!`
-      );
-
-      emailLink.href = `mailto:layacrayton22@gmail.com?subject=${subject}&body=${body}`;
-
-      const details = encodeURIComponent(
-`Babysitting booking request
-
-Parent: ${parentName}
-Phone: ${phone}
-Email: ${email}
-Children: ${children}
-Location: ${address}
-
-Notes:
-${notes || "N/A"}
-
-Payment options: Zelle, Apple Pay, Cash`
-      );
-
-      const start = toGoogleDate(date, startTime);
-      const end = toGoogleDate(date, endTime);
-      const calendarText = encodeURIComponent(`Laya’s Babysitting - ${service}`);
-      const location = encodeURIComponent(address);
-
-      calendarLink.href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${calendarText}&dates=${start}/${end}&details=${details}&location=${location}`;
-
-      resultBox.classList.add("active");
-      resultBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    });
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+
+<header>
+
+<div class="brand">
+<img src="7DED5B2A-F553-4C29-9476-B91C3C689616.png" class="logo-img">
+
+<div class="brand-text">
+<h1>Laya’s Babysitting</h1>
+<p>Austin Area Babysitting</p>
+</div>
+</div>
+
+<div class="menu">☰</div>
+
+</header>
+
+<section class="hero">
+
+<h2>Reliable Babysitting for Busy Families</h2>
+
+<p>
+Flexible babysitting for date nights, weekends, and recurring weekly care.
+</p>
+
+<a class="btn btn-primary">View Services</a>
+<a class="btn btn-gold" href="tel:5122309391">Call</a>
+
+</section>
+
+<section class="services">
+
+<div class="card">
+<h3>Date Night Babysitting</h3>
+<p>Perfect for dinners, events, or evenings out.</p>
+<a class="btn btn-primary">Book</a>
+</div>
+
+<div class="card">
+<h3>Weekend Babysitting</h3>
+<p>Great for errands, events, and weekend help.</p>
+<a class="btn btn-primary">Book</a>
+</div>
+
+<div class="card">
+<h3>Recurring Weekly</h3>
+<p>Consistent weekly babysitting for busy families.</p>
+<a class="btn btn-primary">Book</a>
+</div>
+
+</section>
+
+<section style="padding:40px 20px">
+
+<h2 style="margin-bottom:10px">Areas Served</h2>
+
+<p style="color:var(--muted);margin-bottom:20px">
+Austin, Pflugerville, Round Rock, Georgetown, Manor, Del Valle, Buda, Kyle, San Marcos
+</p>
+
+</section>
+
+<section style="padding:40px 20px">
+
+<h2 style="margin-bottom:10px">Payments Accepted</h2>
+
+<p style="color:var(--muted)">
+Zelle • Apple Pay • Cash
+</p>
+
+</section>
+
+<footer>
+
+<p>Contact: 512-230-9391</p>
+<p>Email: layacrayton22@gmail.com</p>
+
+</footer>
+
 </body>
 </html>
