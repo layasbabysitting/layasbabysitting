@@ -76,15 +76,15 @@
     }
 
     .logo{
-      width: 46px;
-      height: 46px;
+      width: 48px;
+      height: 48px;
       border-radius: 16px;
       display: grid;
       place-items: center;
       background: linear-gradient(135deg, var(--purple), var(--red), var(--gold), var(--pink));
       color: white;
-      box-shadow: var(--shadow);
-      font-size: 20px;
+      box-shadow: 0 10px 28px rgba(127,75,179,0.22);
+      font-size: 21px;
     }
 
     .brand-text h1{
@@ -297,6 +297,10 @@
       font-size: 0.9rem;
       font-weight: 700;
       transition: 0.2s ease;
+    }
+
+    .btn:hover{
+      transform: translateY(-1px);
     }
 
     .btn-primary{
@@ -660,9 +664,9 @@
     <div class="drawer-links">
       <a href="#home" onclick="closeDrawer()">Home</a>
       <a href="#services" onclick="closeDrawer()">Services</a>
-      <a href="#locations-page" onclick="openLocationsFromMenu()">Locations</a>
-      <a href="#payments-page" onclick="openPaymentsFromMenu()">Payments</a>
-      <a href="#reviews-page" onclick="openReviewsFromMenu()">Reviews</a>
+      <a href="#locations-page" onclick="openLocationsFromMenu(event)">Locations</a>
+      <a href="#payments-page" onclick="openPaymentsFromMenu(event)">Payments</a>
+      <a href="#reviews-page" onclick="openReviewsFromMenu(event)">Reviews</a>
       <a href="tel:5122309391" onclick="closeDrawer()">Call: 512-230-9391</a>
       <a href="sms:5122309391" onclick="closeDrawer()">Text Me</a>
       <a href="mailto:layacrayton22@gmail.com" onclick="closeDrawer()">Email Me</a>
@@ -672,6 +676,12 @@
       <h3>Contact</h3>
       <p>Phone: 512-230-9391</p>
       <p>Email: layacrayton22@gmail.com</p>
+    </div>
+
+    <div class="drawer-card">
+      <h3>Rates</h3>
+      <p>Hourly rate: $22–$26 per hour</p>
+      <p>Rate may vary depending on hours, number of children, and booking needs.</p>
     </div>
 
     <div class="drawer-card">
@@ -692,6 +702,11 @@
     <div class="drawer-card">
       <h3>Payments</h3>
       <p>Zelle, Apple Pay, and Cash accepted.</p>
+    </div>
+
+    <div class="drawer-card">
+      <h3>Cancellation</h3>
+      <p>A cancellation fee may apply for last-minute cancellations.</p>
     </div>
   </aside>
 
@@ -731,7 +746,7 @@
           <div class="highlight-box">
             <h3>Why families choose Laya’s Babysitting</h3>
             <p>
-              Easy contact, simple booking, beautiful design, and flexible babysitting made for real family schedules.
+              Easy contact, simple booking, flexible scheduling, and babysitting made for real family routines.
             </p>
 
             <div class="mini-grid">
@@ -874,7 +889,9 @@
             </div>
           </form>
 
-          <p class="form-note">Accepted payments: Zelle, Apple Pay, Cash.</p>
+          <p class="form-note">
+            Accepted payments: Zelle, Apple Pay, Cash. Hourly rate: $22–$26. A cancellation fee may apply for last-minute cancellations.
+          </p>
 
           <div class="result-box" id="resultBox">
             <p>Your booking draft is ready. Use the buttons below to email the booking and add it to Google Calendar.</p>
@@ -1006,6 +1023,9 @@
 
     function showBooking(type){
       hideAllPanels();
+      closeDrawer();
+      resultBox.classList.remove("active");
+
       bookingSection.classList.add("active");
       bookingSection.scrollIntoView({ behavior: "smooth", block: "start" });
 
@@ -1028,7 +1048,8 @@
       bookingSection.classList.remove("active");
     }
 
-    function openLocationsFromMenu(){
+    function openLocationsFromMenu(e){
+      if(e) e.preventDefault();
       closeDrawer();
       hideAllPanels();
       locationsSection.classList.add("active");
@@ -1039,7 +1060,8 @@
       locationsSection.classList.remove("active");
     }
 
-    function openPaymentsFromMenu(){
+    function openPaymentsFromMenu(e){
+      if(e) e.preventDefault();
       closeDrawer();
       hideAllPanels();
       paymentsSection.classList.add("active");
@@ -1050,7 +1072,8 @@
       paymentsSection.classList.remove("active");
     }
 
-    function openReviewsFromMenu(){
+    function openReviewsFromMenu(e){
+      if(e) e.preventDefault();
       closeDrawer();
       hideAllPanels();
       reviewsSection.classList.add("active");
@@ -1061,10 +1084,14 @@
       reviewsSection.classList.remove("active");
     }
 
+    function pad(num){
+      return String(num).padStart(2, "0");
+    }
+
     function toGoogleDate(dateStr, timeStr){
-      const partsDate = dateStr.split("-");
-      const partsTime = timeStr.split(":");
-      return `${partsDate[0]}${partsDate[1]}${partsDate[2]}T${partsTime[0]}${partsTime[1]}00`;
+      const [year, month, day] = dateStr.split("-");
+      const [hour, minute] = timeStr.split(":");
+      return `${year}${month}${day}T${hour}${minute}00`;
     }
 
     document.getElementById("bookingForm").addEventListener("submit", function(e){
@@ -1080,6 +1107,11 @@
       const children = document.getElementById("children").value.trim();
       const address = document.getElementById("address").value.trim();
       const notes = document.getElementById("notes").value.trim();
+
+      if(!date || !startTime || !endTime){
+        alert("Please fill in the date and time.");
+        return;
+      }
 
       const subject = encodeURIComponent(`Babysitting Booking Request - ${service}`);
       const body = encodeURIComponent(
@@ -1100,7 +1132,9 @@ Location: ${address}
 Extra Details:
 ${notes || "N/A"}
 
+Rate range: $22-$26 per hour
 Payment options available: Zelle, Apple Pay, Cash
+Cancellation note: A cancellation fee may apply for last-minute cancellations.
 
 Thank you!`
       );
@@ -1119,7 +1153,9 @@ Location: ${address}
 Notes:
 ${notes || "N/A"}
 
-Payment options: Zelle, Apple Pay, Cash`
+Rate range: $22-$26 per hour
+Payment options: Zelle, Apple Pay, Cash
+Cancellation note: A cancellation fee may apply for last-minute cancellations.`
       );
 
       const start = toGoogleDate(date, startTime);
