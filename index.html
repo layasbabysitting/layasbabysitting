@@ -1,248 +1,524 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laya’s Babysitting</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laya's Babysitting</title>
+  <meta name="description" content="Trusted babysitting in Austin, Pflugerville, Round Rock, Georgetown, Manor, and Del Valle. Book with Laya's Babysitting today." />
+  <style>
+    :root{
+      --purple:#6a0dad;
+      --red:#c62839;
+      --gold:#d4a017;
+      --cream:#fff9f2;
+      --white:#ffffff;
+      --dark:#2b1833;
+      --soft:#f5edff;
+    }
 
-<style>
+    *{
+      box-sizing:border-box;
+    }
 
-/* COLORS */
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:var(--cream);
+      color:var(--dark);
+      line-height:1.6;
+    }
 
-:root{
---purple:#8b4bd4;
---pink:#f6b6d4;
---gold:#e0b75a;
---white:#ffffff;
---text:#2c1230;
-}
+    a{
+      text-decoration:none;
+    }
 
-/* RESET */
+    .topbar{
+      background:var(--dark);
+      color:var(--white);
+      text-align:center;
+      padding:10px 15px;
+      font-size:14px;
+    }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Segoe UI,Arial,sans-serif;
-}
+    .topbar a{
+      color:var(--gold);
+      font-weight:bold;
+    }
 
-body{
-background:#fffafd;
-color:var(--text);
-}
+    header{
+      background:linear-gradient(135deg, var(--purple), var(--red), var(--gold));
+      color:var(--white);
+      padding:30px 20px 80px;
+    }
 
-/* HEADER */
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+    }
 
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px;
-}
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-bottom:40px;
+    }
 
-.brand{
-display:flex;
-align-items:center;
-gap:12px;
-}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      font-size:24px;
+      font-weight:bold;
+    }
 
-.logo-img{
-width:52px;
-height:52px;
-border-radius:16px;
-border:2px solid white;
-box-shadow:
-0 0 18px rgba(224,183,90,0.45),
-0 6px 18px rgba(139,75,212,0.25);
-}
+    .brand img{
+      width:70px;
+      height:70px;
+      object-fit:cover;
+      border-radius:50%;
+      background:#fff;
+      padding:5px;
+    }
 
-.brand h1{
-font-size:18px;
-}
+    .nav-links{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
 
-.brand p{
-font-size:12px;
-color:#7a5b7e;
-}
+    .nav-links a{
+      color:var(--white);
+      font-weight:bold;
+    }
 
-/* MENU */
+    .hero{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:30px;
+      align-items:center;
+    }
 
-.menu{
-font-size:26px;
-cursor:pointer;
-}
+    .hero h1{
+      font-size:50px;
+      line-height:1.1;
+      margin:0 0 15px;
+    }
 
-/* HERO */
+    .hero p{
+      font-size:18px;
+      margin:0 0 25px;
+      max-width:650px;
+    }
 
-.hero{
-padding:40px 20px;
-text-align:center;
-}
+    .hero-buttons{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:15px;
+    }
 
-.hero h2{
-font-size:34px;
-margin-bottom:10px;
-}
+    .btn{
+      display:inline-block;
+      padding:14px 22px;
+      border-radius:999px;
+      font-weight:bold;
+      transition:0.2s ease;
+    }
 
-.hero p{
-max-width:600px;
-margin:auto;
-color:#7a5b7e;
-}
+    .btn-primary{
+      background:var(--white);
+      color:var(--purple);
+    }
 
-/* BUTTONS */
+    .btn-secondary{
+      border:2px solid var(--white);
+      color:var(--white);
+      background:transparent;
+    }
 
-.btn{
-padding:12px 18px;
-border-radius:12px;
-font-weight:bold;
-cursor:pointer;
-display:inline-block;
-margin:10px;
-text-decoration:none;
-transition:.2s;
-}
+    .btn:hover{
+      transform:translateY(-2px);
+    }
 
-.btn-primary{
-color:white;
-background:linear-gradient(135deg,#8b4bd4,#f6b6d4);
-box-shadow:0 6px 18px rgba(139,75,212,0.35);
-}
+    .hero-card{
+      background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.2);
+      border-radius:22px;
+      padding:25px;
+      backdrop-filter:blur(5px);
+    }
 
-.btn-gold{
-color:#5c4200;
-background:linear-gradient(135deg,#fff3d4,#e0b75a);
-box-shadow:0 6px 18px rgba(224,183,90,0.35);
-}
+    .hero-card h3{
+      margin-top:0;
+      font-size:24px;
+    }
 
-.btn:hover{
-transform:translateY(-2px);
-box-shadow:0 8px 24px rgba(139,75,212,0.4);
-}
+    section{
+      padding:70px 20px;
+    }
 
-/* SERVICES */
+    .section-title{
+      text-align:center;
+      font-size:34px;
+      color:var(--purple);
+      margin:0 0 12px;
+    }
 
-.services{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-padding:40px 20px;
-}
+    .section-subtitle{
+      text-align:center;
+      max-width:720px;
+      margin:0 auto 35px;
+    }
 
-.card{
-background:white;
-padding:20px;
-border-radius:20px;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-}
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+    }
 
-.card h3{
-margin-bottom:10px;
-}
+    .card{
+      background:var(--white);
+      border-radius:20px;
+      padding:24px;
+      box-shadow:0 10px 25px rgba(40,20,50,0.08);
+    }
 
-/* SECTION */
+    .card h3{
+      margin-top:0;
+      color:var(--red);
+    }
 
-.section{
-padding:40px 20px;
-}
+    .areas{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      justify-content:center;
+    }
 
-/* FOOTER */
+    .pill{
+      background:var(--soft);
+      color:var(--purple);
+      padding:10px 16px;
+      border-radius:999px;
+      font-weight:bold;
+    }
 
-footer{
-text-align:center;
-padding:30px;
-color:#7a5b7e;
-}
+    .pricing-grid,
+    .contact-grid,
+    .booking-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+    }
 
-</style>
+    .payments{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:25px;
+    }
+
+    .pay{
+      background:var(--white);
+      border:2px solid #eee;
+      border-radius:14px;
+      padding:14px 20px;
+      min-width:120px;
+      text-align:center;
+      font-weight:bold;
+    }
+
+    .booking-wrap{
+      background:linear-gradient(135deg,#fff,#f9f1ff);
+      border-radius:24px;
+      padding:30px;
+      box-shadow:0 10px 25px rgba(40,20,50,0.08);
+    }
+
+    .contact-card{
+      background:var(--white);
+      border-radius:20px;
+      padding:24px;
+      box-shadow:0 10px 25px rgba(40,20,50,0.08);
+    }
+
+    .contact-card a{
+      color:var(--purple);
+      font-weight:bold;
+      word-break:break-word;
+    }
+
+    .notice{
+      background:#fff7df;
+      border-left:6px solid var(--gold);
+      padding:18px;
+      border-radius:14px;
+      margin-top:20px;
+    }
+
+    footer{
+      background:var(--dark);
+      color:var(--white);
+      text-align:center;
+      padding:30px 20px;
+    }
+
+    .small{
+      font-size:14px;
+    }
+
+    @media (max-width:900px){
+      .hero,
+      .cards,
+      .pricing-grid,
+      .contact-grid,
+      .booking-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero h1{
+        font-size:38px;
+      }
+    }
+
+    @media (max-width:560px){
+      .hero h1{
+        font-size:30px;
+      }
+
+      .section-title{
+        font-size:28px;
+      }
+
+      .brand{
+        font-size:20px;
+      }
+
+      .brand img{
+        width:58px;
+        height:58px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
+  <div class="topbar">
+    Babysitting available in Austin, Pflugerville, Round Rock, Georgetown, Manor, and Del Valle •
+    <a href="tel:5122309391">Call/Text 512-230-9391</a>
+  </div>
 
-<div class="brand">
+  <header>
+    <div class="container">
+      <div class="nav">
+        <div class="brand">
+          <img src="butterfly-logo.png" alt="Butterfly logo">
+          <span>Laya's Babysitting</span>
+        </div>
 
-<img src="7DED5B2A-F553-4C29-9476-B91C3C689616.png" class="logo-img">
+        <div class="nav-links">
+          <a href="#services">Services</a>
+          <a href="#rates">Rates</a>
+          <a href="#booking">Booking</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
 
-<div>
-<h1>Laya’s Babysitting</h1>
-<p>Austin Area Babysitting</p>
-</div>
+      <div class="hero">
+        <div>
+          <h1>Trusted babysitting for busy families.</h1>
+          <p>
+            Safe, dependable, and flexible babysitting for parents who need care they can feel good about.
+            Easy booking, simple payment options, and quick communication.
+          </p>
 
-</div>
+          <div class="hero-buttons">
+            <a class="btn btn-primary" href="YOUR_BOOKING_LINK" target="_blank">Book Now</a>
+            <a class="btn btn-secondary" href="sms:5122309391">Text Me</a>
+          </div>
 
-<div class="menu">☰</div>
+          <p class="small">Payments accepted: Zelle, Apple Pay, and Cash</p>
+        </div>
 
-</header>
+        <div class="hero-card">
+          <h3>Quick Info</h3>
+          <ul>
+            <li>Rates: <strong>$22–$26/hour</strong></li>
+            <li>Flexible scheduling</li>
+            <li>Great for date nights, weekends, and recurring care</li>
+            <li>Service areas around Austin</li>
+            <li>Fast booking and contact options</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
 
-<section class="hero">
+  <section id="services">
+    <div class="container">
+      <h2 class="section-title">Services</h2>
+      <p class="section-subtitle">
+        Childcare help for families who want dependable babysitting and easy communication.
+      </p>
 
-<h2>Reliable Babysitting for Busy Families</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Date Night Babysitting</h3>
+          <p>
+            Perfect for parents who need trusted care for evenings, outings, or appointments.
+          </p>
+        </div>
 
-<p>
-Flexible babysitting for date nights, weekends, and recurring weekly care.
-</p>
+        <div class="card">
+          <h3>Weekend Babysitting</h3>
+          <p>
+            Need a few hours during the weekend? Flexible babysitting available based on schedule.
+          </p>
+        </div>
 
-<a class="btn btn-primary">View Services</a>
-<a class="btn btn-gold" href="tel:5122309391">Call</a>
+        <div class="card">
+          <h3>Recurring Care</h3>
+          <p>
+            Regular babysitting may be available for families who need ongoing support.
+          </p>
+        </div>
+      </div>
 
-</section>
+      <div class="notice">
+        <strong>Why parents choose Laya's Babysitting:</strong><br>
+        Caring service, clear communication, flexible booking, and dependable childcare.
+      </div>
+    </div>
+  </section>
 
-<section class="services">
+  <section>
+    <div class="container">
+      <h2 class="section-title">Service Areas</h2>
+      <p class="section-subtitle">
+        Babysitting offered in these areas:
+      </p>
 
-<div class="card">
-<h3>Date Night Babysitting</h3>
-<p>Perfect for dinners, events, and evenings out.</p>
-<a class="btn btn-primary">Book</a>
-</div>
+      <div class="areas">
+        <div class="pill">Austin</div>
+        <div class="pill">Pflugerville</div>
+        <div class="pill">Round Rock</div>
+        <div class="pill">Georgetown</div>
+        <div class="pill">Manor</div>
+        <div class="pill">Del Valle</div>
+      </div>
+    </div>
+  </section>
 
-<div class="card">
-<h3>Weekend Babysitting</h3>
-<p>Great for errands, events, and weekend help.</p>
-<a class="btn btn-primary">Book</a>
-</div>
+  <section id="rates">
+    <div class="container">
+      <h2 class="section-title">Rates & Payments</h2>
+      <p class="section-subtitle">
+        Simple pricing and easy payment options.
+      </p>
 
-<div class="card">
-<h3>Recurring Weekly Babysitting</h3>
-<p>Consistent weekly babysitting for busy families.</p>
-<a class="btn btn-primary">Book</a>
-</div>
+      <div class="pricing-grid">
+        <div class="card">
+          <h3>Hourly Rate</h3>
+          <p><strong>$22–$26 per hour</strong></p>
+          <p>
+            Final rate can depend on hours needed, location, timing, and booking details.
+          </p>
+        </div>
 
-</section>
+        <div class="card">
+          <h3>Cancellation Policy</h3>
+          <p>
+            A cancellation fee may apply for late cancellations.
+          </p>
+          <p>
+            You can update the exact fee later if you want.
+          </p>
+        </div>
+      </div>
 
-<section class="section">
+      <div class="payments">
+        <div class="pay">Zelle</div>
+        <div class="pay">Apple Pay</div>
+        <div class="pay">Cash</div>
+      </div>
+    </div>
+  </section>
 
-<h2>Areas Served</h2>
+  <section id="booking">
+    <div class="container">
+      <h2 class="section-title">Booking</h2>
+      <p class="section-subtitle">
+        Let parents book online and have appointments go to your calendar setup.
+      </p>
 
-<p>
-Austin • Pflugerville • Round Rock • Georgetown • Manor • Del Valle • Buda • Kyle • San Marcos
-</p>
+      <div class="booking-wrap">
+        <div class="booking-grid">
+          <div>
+            <h3 style="color:#6a0dad; margin-top:0;">How it works</h3>
+            <p>
+              Parents click your booking button, choose a day and time, and submit their appointment.
+              Once your booking link is connected to your calendar, you can get alerts on your phone too.
+            </p>
+            <p>
+              Best options:
+            </p>
+            <ul>
+              <li>Google Appointment Schedule</li>
+              <li>Calendly connected to Google Calendar</li>
+            </ul>
 
-</section>
+            <a class="btn btn-primary" href="YOUR_BOOKING_LINK" target="_blank">Open Booking Page</a>
+          </div>
 
-<section class="section">
+          <div class="card">
+            <h3 style="margin-top:0;">Setup note</h3>
+            <p>
+              Replace both places that say:
+              <br><strong>YOUR_BOOKING_LINK</strong>
+            </p>
+            <p>
+              with your real booking link.
+            </p>
+            <p>
+              That is what makes bookings actually go to your calendar and phone.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<h2>Payments Accepted</h2>
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-subtitle">
+        Reach out anytime for availability and questions.
+      </p>
 
-<p>Zelle • Apple Pay • Cash</p>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3 style="margin-top:0; color:#c62839;">Phone</h3>
+          <p><a href="tel:5122309391">512-230-9391</a></p>
+          <p>Call or text for faster responses.</p>
+        </div>
 
-</section>
+        <div class="contact-card">
+          <h3 style="margin-top:0; color:#c62839;">Email</h3>
+          <p><a href="mailto:layacrayton22@gmail.com">LAYACRAYTON22@gmail.com</a></p>
+          <p>Email for booking details and questions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="section">
-
-<h2>Contact</h2>
-
-<p>Phone: 512-230-9391</p>
-<p>Email: layacrayton22@gmail.com</p>
-
-</section>
-
-<footer>
-
-<p>© Laya’s Babysitting</p>
-
-</footer>
+  <footer>
+    <p><strong>Laya's Babysitting</strong></p>
+    <p class="small">Reliable • Safe • Trusted</p>
+    <p class="small">Serving Austin, Pflugerville, Round Rock, Georgetown, Manor, and Del Valle</p>
+  </footer>
 
 </body>
 </html>
